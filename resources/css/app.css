@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import './theme.css';
+@import './login.css';
+@import './employees.css';
+/* ITMS Theme – ปรับสีรวมตรงนี้ทีเดียวทั้งระบบ */
+:root{
+  --c-bg: #0b1220;
+  --c-panel: #111a2b;
+  --c-muted: #7e8aa0;
+  --c-text: #e8edf6;
+  --c-accent: #00b3ff;   /* ฟ้า */
+  --c-accent-2: #ff6b6b; /* แดง แจ้งเตือน */
+  --radius: 14px;
+  --shadow: 0 10px 30px rgba(0,0,0,.25);
+}
+
+* { box-sizing: border-box; }
+html,body{ height:100%; }
+body{
+  margin:0; background:var(--c-bg); color:var(--c-text);
+  font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+}
+
+/* Layout */
+.app { display:grid; grid-template-columns: 260px 1fr; min-height:100vh; }
+.sidebar{
+  background: var(--c-panel);
+  padding: 20px; position: sticky; top:0; height:100vh;
+  box-shadow: var(--shadow);
+}
+.brand { display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:.3px; }
+.brand .dot{ width:10px; height:10px; border-radius:50%; background:var(--c-accent); }
+
+.nav { margin:24px 0 0; display:grid; gap:6px; }
+.nav a{
+  display:flex; align-items:center; gap:10px;
+  padding:10px 12px; border-radius:10px; text-decoration:none; color:var(--c-text);
+  opacity:.9;
+}
+.nav a:hover{ background:#0d1628; opacity:1; }
+.nav a.active{ background:#0f1c34; outline:1px solid #1b2b4e; }
+
+.content { padding:28px 32px; }
+.panel{
+  background: var(--c-panel); border-radius: var(--radius);
+  padding: 20px; box-shadow: var(--shadow);
+}
+
+/* ปุ่ม */
+.btn{ display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:10px;
+  background:var(--c-accent); color:#001222; border:0; cursor:pointer; font-weight:600; }
+.btn.secondary{ background:#1b2b4e; color:var(--c-text); }
+
+/* ตาราง */
+.table{ width:100%; border-collapse:separate; border-spacing:0 8px; }
+.table thead th{ text-align:left; color:var(--c-muted); font-weight:600; padding:6px 10px; }
+.table tbody tr{ background:#0e1730; }
+.table tbody td{ padding:12px 10px; border-top:1px solid #142044; border-bottom:1px solid #142044; }
+.table tbody tr:first-child td{ border-top-left-radius:10px; border-top-right-radius:10px; }
+.table tbody tr:last-child td{ border-bottom-left-radius:10px; border-bottom-right-radius:10px; }
+.badge{ padding:4px 8px; border-radius:999px; font-size:12px; }
+.badge.ok{ background:#073; color:#c8ffd6;}
+.badge.warn{ background:#402; color:#ffc6d1;}

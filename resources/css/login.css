@@ -1,0 +1,4 @@
+.login-wrap{ width:100%; max-width:960px; display:grid; grid-template-columns: 1.1fr .9fr; gap:1.25rem; }
+.panel{ padding:1.25rem; border-radius:var(--radius); }
+.login-card{ padding:1.25rem; border-radius:var(--radius); }
+@media (max-width:900px){ .login-wrap{ grid-template-columns:1fr; max-width:520px; } }

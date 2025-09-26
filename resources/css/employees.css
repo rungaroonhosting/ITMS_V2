@@ -1,0 +1,3 @@
+/* สไตล์เฉพาะหน้า employees */
+.filters .input { min-width: 180px; }
+.muted { color: var(--text-muted); font-size:.85rem; }
