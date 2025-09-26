@@ -26,68 +26,108 @@
 
   <!-- กล่องหลัก -->
   <main class="login-shell">
-    <section class="login-card">
-      <!-- ฝั่งซ้าย (ข้อความ/ไอคอน) -->
-      <aside class="hero-pane">
-        <div class="hero-inner">
-          <h1 class="hero-title">บริการออนไลน์</h1>
-          <p class="hero-sub">
-            ให้คุณจัดการกลุ่มเรื่องต่าง ๆ ด้วยตัวคุณเอง ตลอด 24 ชั่วโมง
-            ระบบจัดการ IT ที่ครอบคลุมและใช้งานง่าย
-          </p>
-          <p class="hero-tag">Professional IT Management Solutions</p>
+  <section class="login-card">
+    
+    {{-- ฝั่งซ้าย --}}
+    <aside class="hero-pane hero-pane--tint hero-contrast hero-right">
+  <div class="hero-inner">
+    <!-- กล่องคำพูด -->
+    <div class="speech-box">
+      <h1 class="hero-title">บริการออนไลน์</h1>
+      <p class="hero-sub">ให้คุณจัดการเรื่องต่าง ๆ ด้วยตัวคุณเอง ตลอด 24 ชั่วโมง</p>
+      <p class="hero-tag">Professional IT Management Solutions</p>
+    </div>
 
-          <ul class="hero-badges" aria-label="features">
-            <li>👥</li><li>💻</li><li>📦</li><li>🧾</li><li>🛠️</li><li>⚙️</li>
-          </ul>
+    <!-- รูป Mockup (จะถูกจัดไปชิดขวา) -->
+    <figure class="mock-card mock-right">
+      <img src="{{ asset('images/mockup.png') }}" alt="IT Admin Mockup">
+    </figure>
+  </div>
+</aside>
 
-          <!-- เว้นที่สำหรับ Mascot -->
-          <div class="hero-art" aria-label="Mascot slot">
-            <div class="mascot-slot">MASCOT</div>
-          </div>
-        </div>
-      </aside>
+    {{-- ฝั่งขวา --}}
+    <section class="form-pane form-pane--card">
+    {{-- โลโก้เหนือหัวข้อ (ถ้ามีไฟล์) --}}
+    <div class="brand-logo">
+        {{-- แก้ path ให้ตรงของคุณ --}}
+        {{-- <img src="{{ asset('images/logo.png') }}" alt="ITMS Logo"> --}}
+    </div>
 
-      <!-- ฝั่งขวา (ฟอร์ม) -->
-      <section class="form-pane">
-        <div class="brand">
-          <!-- เว้นที่สำหรับ LOGO -->
-          <div class="logo-slot" role="img" aria-label="Logo slot">LOGO</div>
-          <p class="brand-sub">IT Management System v2.1</p>
-        </div>
+    <h2 class="form-title">เข้าสู่ระบบ</h2>
 
-        <h2 class="form-title">เข้าสู่ระบบ</h2>
+    @if ($errors->any())
+        <div class="alert error">อีเมลหรือรหัสผ่านไม่ถูกต้อง</div>
+    @endif
 
-        @if ($errors->any())
-          <div class="alert error">อีเมลหรือรหัสผ่านไม่ถูกต้อง</div>
-        @endif
+    <form method="POST" action="{{ route('login') }}" class="login-form">
+    @csrf
 
-        <form method="POST" action="{{ route('login') }}" class="login-form">
-          @csrf
+    {{-- Email --}}
+    <label class="field">
+        <span>อีเมล</span>
+        <input class="input" type="email" name="email"
+               value="{{ old('email') }}" placeholder="กรอกอีเมล"
+               required autocomplete="username">
+        @error('email') <small class="error-text">{{ $message }}</small> @enderror
+    </label>
 
-          <label class="field">
-            <span>อีเมล</span>
-            <input class="input" type="email" name="email" placeholder="กรอกอีเมล" required autocomplete="username">
-          </label>
+    {{-- Password --}}
+    <label class="field pass-wrap">
+        <span>รหัสผ่าน</span>
+        <input class="input" type="password" name="password"
+               placeholder="กรอกรหัสผ่าน" required
+               autocomplete="current-password" id="password">
+        <button type="button" class="eye" data-toggle-pass aria-label="แสดง/ซ่อนรหัสผ่าน">👁</button>
+        @error('password') <small class="error-text">{{ $message }}</small> @enderror
+    </label>
 
-          <label class="field pass-wrap">
-            <span>รหัสผ่าน</span>
-            <input class="input" type="password" name="password" placeholder="กรอกรหัสผ่าน" required autocomplete="current-password" id="password">
-            <button class="eye" type="button" data-toggle-pass aria-label="สลับการแสดงรหัสผ่าน">👁️</button>
-          </label>
-
-          <label class="remember">
+    {{-- Remember + Forgot --}}
+    <div class="form-row">
+        <label class="remember">
             <input type="checkbox" name="remember"> จดจำการเข้าสู่ระบบ
-          </label>
+        </label>
+        @if (Route::has('password.request'))
+            <a class="link" href="{{ route('password.request') }}">ลืมรหัสผ่าน?</a>
+        @endif
+    </div>
 
-          <button type="submit" class="btn-primary">
-            <span class="arrow">➜</span> เข้าสู่ระบบ
-          </button>
-        </form>
+    {{-- Submit --}}
+    <button type="submit" class="btn-primary btn-hero">เข้าสู่ระบบ</button>
 
-        <p class="foot">© 2025 IT Management System</p>
-      </section>
-    </section>
-  </main>
+    {{-- Register section --}}
+    <div class="meta">
+    <div class="sep"></div>
+    <p class="foot">
+        © 2025 IT Management System
+        <span class="dot">•</span>
+        <span class="by">System by <strong>Rungaroon <em>Solution</em></strong></span>
+    </p>
+</div>
+
+</form>
+
+<script>
+document.addEventListener('click', e => {
+  const btn = e.target.closest('[data-toggle-pass]');
+  if(!btn) return;
+  const input = document.getElementById('password');
+  if(input) input.type = input.type === 'password' ? 'text' : 'password';
+});
+</script>
+
+</section>
+
+<script>
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest('[data-toggle-pass]');
+  if (!btn) return;
+  const input = document.getElementById('password');
+  if (!input) return;
+  input.type = input.type === 'password' ? 'text' : 'password';
+});
+</script>
+
+  </section>
+</main>
 </body>
 </html>
