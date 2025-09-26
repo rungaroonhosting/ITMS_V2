@@ -1,0 +1,63 @@
+/* ===== ITMS Orange Premium Background (Login) ===== */
+:root{
+  --o1:#ff6a2b;     /* ส้มเข้ม */
+  --o2:#ff8246;     /* ส้มกลาง */
+  --o3:#ffb36d;     /* ส้มทอง */
+  --bg:#f4f6fb;
+}
+
+/* wrapper พื้นหลัง (ซ้อนหลายเลเยอร์) */
+.bg-wrap{position:fixed;inset:0;pointer-events:none;z-index:-1}
+
+/* เลเยอร์ 1: gradient ใหญ่ ฟุ้งๆ แบบโฆษณา */
+.bg-gradient{
+  position:absolute;inset:-10%;
+  background:
+    radial-gradient(1000px 700px at 18% 18%, rgba(255,130,70,.55), transparent 60%),
+    radial-gradient(900px 640px at 85% 18%, rgba(255,100,50,.35), transparent 62%),
+    radial-gradient(1000px 600px at 50% 88%, rgba(255,179,109,.28), transparent 65%),
+    linear-gradient(135deg, var(--o1), var(--o2) 45%, var(--o3));
+  filter: saturate(1.1) contrast(1.02);
+  animation: bg-pan 18s ease-in-out infinite alternate;
+}
+@keyframes bg-pan {
+  0%   {transform: translate3d(-2%, -1%, 0) scale(1.02);}
+  100% {transform: translate3d( 2%,  1%, 0) scale(1.02);}
+}
+
+/* เลเยอร์ 2: grid บาง ๆ */
+.bg-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(0,0,0,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,.04) 1px, transparent 1px);
+  background-size:28px 28px;
+  mask-image:radial-gradient(1200px 850px at 50% 45%, #000, transparent 70%);
+}
+
+/* เลเยอร์ 3: noise เบามาก (เพิ่ม texture) */
+.bg-noise{
+  position:absolute;inset:0;opacity:.05;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/></filter><rect width='120' height='120' filter='url(%23n)' opacity='0.25'/></svg>");
+  background-size:220px 220px;
+}
+
+/* เลเยอร์ 4: ดาว/ประกายระยิบระยับ */
+.bg-stars{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(2px 2px at 10% 20%, rgba(255,255,255,.8), transparent 60%),
+    radial-gradient(2px 2px at 30% 10%, rgba(255,255,255,.6), transparent 60%),
+    radial-gradient(2px 2px at 80% 25%, rgba(255,255,255,.75), transparent 60%),
+    radial-gradient(2px 2px at 70% 60%, rgba(255,255,255,.65), transparent 60%),
+    radial-gradient(2px 2px at 40% 70%, rgba(255,255,255,.75), transparent 60%);
+  opacity:.35;
+  mask-image:radial-gradient(1100px 800px at 60% 35%, #000, transparent 65%);
+  animation: twinkle 7s linear infinite alternate;
+}
+@keyframes twinkle { from {opacity:.22} to {opacity:.5} }
+
+/* วงแหวนแสงสำหรับหลังมาสคอต (ถ้าใช้) */
+.glow{position:absolute;border-radius:50%;filter:blur(26px);opacity:.55;pointer-events:none}
+.glow-1{width:280px;height:280px;background:radial-gradient(circle, rgba(255,255,255,.75), transparent 55%);right:16%;top:18%}
+.glow-2{width:220px;height:220px;background:radial-gradient(circle, rgba(255,179,90,.85), transparent 60%);left:18%;bottom:12%}

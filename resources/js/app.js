@@ -5,6 +5,17 @@ import Alpine from 'alpinejs';
 import './theme.js';
 import './employees.js';
 
+// resources/js/app.js
+import '../css/app.css';
+import '../css/auth.css';   // ถ้ามี
+import './auth.js';         // ถ้ามี
+
+import '../css/auth.login.css';
+import './auth.login.js';
+
+import '../css/login.css';
+import '../css/login.background.orange.css';
+
 window.Alpine = Alpine;
 
 Alpine.start();

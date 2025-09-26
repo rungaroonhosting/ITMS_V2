@@ -20,7 +20,7 @@ class RolesAndAdminSeeder extends Seeder
             ['email' => 'wittaya.j@better-groups.com'],
             [
                 'name' => 'System Admin',
-                'password' => bcrypt('Admin!234'),
+                'password' => bcrypt('Admin@123'),
             ]
         );
 
