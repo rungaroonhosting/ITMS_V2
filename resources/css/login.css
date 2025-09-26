@@ -54,24 +54,97 @@ body {font-family:system-ui, -apple-system, 'Inter', sans-serif; background:var(
 .circle.circ2{width:200px;height:200px;right:10%;bottom:14%}
 
 /* ========== Login Card ========== */
-.login-shell {display:grid; place-items:center; min-height:100vh; padding:20px}
-.login-card {
-  width:min(1200px,94vw);
-  display:grid; grid-template-columns:1.2fr 1fr;
-  border-radius:22px; overflow:hidden; background:#fff;
-  box-shadow:0 20px 80px rgba(0,0,0,.35);
+/* ========== การ์ดล็อกอิน (เน้นกรอบสีขาว) ========== */
+:root{
+  --card:#ffffff;
+  --text:#1f2937;
+  --muted:#6b7280;
+  --placeholder:#9ca3af;
+  --border:#e5e7eb;
+
+  --primaryA:#ff512f; /* ปุ่ม ไล่สีแดงส้ม → ชมพู */
+  --primaryB:#dd2476;
+
+  --r-xl:24px;
+  --shadow-lg:0 28px 100px rgba(0,0,0,.18);
+  --shadow-md:0 16px 50px rgba(0,0,0,.12);
 }
 
-/* left */
-.hero-pane {
-  padding:60px; color:#fff;
-  background:transparent; /* ใช้ gradient global */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: system-ui, -apple-system, "Kanit", Inter, Segoe UI, Roboto, Arial, sans-serif;
+  color:var(--text);
 }
-.hero-title{font-size:46px;font-weight:800;margin-bottom:14px}
-.hero-sub{font-size:18px;line-height:1.6;opacity:.9;margin-bottom:20px}
 
-/* right */
-.form-pane {padding:40px}
-.form-title{text-align:center;color:#b91c1c;font-weight:800;font-size:26px;margin:12px 0 24px}
-.input{width:100%;padding:12px 14px;border-radius:10px;border:1px solid #ddd;margin-bottom:14px}
-.btn-primary{width:100%;padding:12px;border-radius:10px;background:linear-gradient(90deg,var(--c1),var(--c2));color:#fff;font-weight:700;font-size:16px;cursor:pointer}
+/* วางการ์ดกลางจอ */
+.login-shell{min-height:100svh;display:grid;place-items:center;padding:40px}
+
+/* ตัวการ์ดสองคอลัมน์ */
+.login-card{
+  width:min(1180px,96vw);
+  display:grid;grid-template-columns:1.1fr 1fr;
+  background:var(--card);border-radius:var(--r-xl);overflow:hidden;
+  box-shadow:var(--shadow-lg);border:1px solid rgba(255,255,255,.28)
+}
+
+/* ฝั่งซ้าย */
+.hero-pane{background:linear-gradient(120deg, rgba(255,130,70,.95), rgba(255,81,47,.95));color:#fff}
+.hero-inner{padding:56px 48px;min-height:360px;display:flex;flex-direction:column;justify-content:center}
+.hero-title{font-size:48px;font-weight:900;margin:0 0 10px;text-shadow:0 2px 0 rgba(0,0,0,.18)}
+.hero-sub{margin:0 0 12px;line-height:1.6;opacity:.98}
+.hero-tag{margin:4px 0 18px;font-weight:800;font-style:italic;color:#ffe7c4}
+.hero-badges{list-style:none;padding:0;margin:0;display:flex;gap:12px}
+.hero-badges li{width:46px;height:46px;border-radius:14px;background:rgba(255,255,255,.18);display:grid;place-items:center;font-size:22px;backdrop-filter:blur(2px);box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 10px 22px rgba(0,0,0,.10)}
+.hero-art{position:relative;margin-top:24px}
+.mascot-slot{width:180px;height:120px;border-radius:16px;background:rgba(255,255,255,.22);display:grid;place-items:center;font-weight:800;letter-spacing:.3px}
+
+/* ฝั่งขวา (ฟอร์ม) */
+.form-pane{padding:36px 36px 24px;background:var(--card);color:var(--text)}
+.brand{display:flex;flex-direction:column;align-items:center;gap:6px;margin-bottom:6px}
+.logo-slot{width:80px;height:80px;border-radius:50%;background:rgba(16,24,40,.08);display:grid;place-items:center;font-weight:800;color:#334155}
+.brand-sub{color:var(--muted);font-size:.95rem}
+.form-title{text-align:center;color:#b91c1c;font-weight:900;margin:10px 0 18px;font-size:26px}
+
+/* แจ้งเตือน */
+.alert{border-radius:14px;padding:10px 12px;margin-bottom:12px;font-weight:600}
+.alert.error{background:#fee2e2;border:1px solid #fecaca;color:#991b1b}
+
+/* ฟอร์ม/อินพุต */
+.login-form{display:grid;gap:14px}
+.field{display:grid;gap:6px}
+.field>span{color:var(--muted);font-size:.92rem}
+.input{
+  width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:12px;
+  background:#fff;color:var(--text);font-size:15px;transition:border-color .2s, box-shadow .2s
+}
+.input::placeholder{color:var(--placeholder)}
+.input:focus{outline:none;border-color:#ff6a00;box-shadow:0 0 0 3px rgba(255,106,0,.15)}
+
+/* toggle password */
+.pass-wrap{position:relative}
+.eye{
+  position:absolute;right:8px;top:50%;transform:translateY(-50%);
+  width:38px;height:38px;border:0;border-radius:10px;background:#f1f5ff;cursor:pointer;box-shadow:var(--shadow-md);color:#334155
+}
+
+/* จำการเข้าสู่ระบบ */
+.remember{display:flex;gap:8px;align-items:center;color:var(--muted);margin-top:2px}
+.remember input{accent-color:#ff6a00}
+
+/* ปุ่ม */
+.btn-primary{
+  margin-top:6px;width:100%;display:flex;gap:10px;align-items:center;justify-content:center;
+  border:0;border-radius:12px;padding:12px 16px;
+  background:linear-gradient(90deg,var(--primaryA),var(--primaryB));color:#fff;font-weight:900;letter-spacing:.2px;cursor:pointer;box-shadow:0 6px 18px rgba(221,36,118,.35);transition:transform .12s ease, filter .2s
+}
+.btn-primary:hover{transform:translateY(-2px);filter:brightness(1.03)}
+.btn-primary .arrow{filter:brightness(1.2)}
+.foot{margin-top:auto;text-align:center;color:var(--muted);padding-top:14px}
+
+/* ตอบสนองจอเล็ก */
+@media (max-width:1080px){
+  .login-card{grid-template-columns:1fr}
+  .hero-art{display:none}
+}
