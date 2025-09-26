@@ -1,28 +1,49 @@
 <?php
+
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
-Route::get('/', fn() => redirect()->route('dashboard'));
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+*/
 
-//Route::middleware(['auth'])->group(function () {
-Route::middleware(['auth','role:SUPER ADMIN'])->group(function () {
-    // ต้องเป็น pages.dashboard
-    Route::view('/dashboard', 'pages.dashboard')->name('dashboard');
+// root -> ไปหน้า login
+Route::get('/', fn() => redirect()->route('login'));
 
-    Route::middleware('role:admin')->group(function () {
-        Route::view('/admin', 'pages.admin')->name('admin.index');
-    });
+// แสดงฟอร์ม Login
+Route::get('/login', fn () => view('auth.login'))->name('login');
 
-    Route::middleware('role:it|admin')->group(function () {
-        Route::view('/it/console', 'pages.it-console')->name('it.console');
+// กด Login (ใช้ users ใน DB จริง)
+Route::post('/login', function (Request $request) {
+    $credentials = $request->validate([
+        'email' => ['required', 'email'],
+        'password' => ['required'],
+    ]);
 
-	Route::get('/', fn()=>redirect()->route('employees.index'))->name('dashboard'); // ถ้ายังไม่มีแดชบอร์ดจริง
-	Route::resource('employees', EmployeeController::class);
-//        Route::get('/incidents', fn()=>view('pages.incidents.index'))->name('incidents.index');
-	Route::get('/incidents', [IncidentController::class, 'index'])->name('incidents.index');
-        Route::get('/assets', fn()=>view('pages.assets.index'))->name('assets.index');
-        Route::get('/requests', fn()=>view('pages.requests.index'))->name('requests.index');
-    });
+    $remember = (bool) $request->boolean('remember');
+
+    if (Auth::attempt($credentials, $remember)) {
+        $request->session()->regenerate();
+        return redirect()->intended('/dashboard')->with('success', 'ยินดีต้อนรับ!');
+    }
+
+    return back()
+        ->withErrors(['email' => 'อีเมลหรือรหัสผ่านไม่ถูกต้อง'])
+        ->onlyInput('email');
+})->name('login.post')->middleware('throttle:5,1'); // กัน brute force
+
+// ออกจากระบบ
+Route::post('/logout', function (Request $request) {
+    Auth::logout();
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
+    return redirect()->route('login');
+})->name('logout');
+
+// Dashboard (ต้องล็อกอินก่อน)
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', fn () => view('dashboard'))->name('dashboard');
 });
-
-require __DIR__.'/auth.php';
-
