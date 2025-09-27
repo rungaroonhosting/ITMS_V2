@@ -30,23 +30,29 @@
     
     {{-- ฝั่งซ้าย --}}
    {{-- ====== ฝั่งซ้าย (Hero) – เหมือนรูปแรก ====== --}}
-<aside class="hero-pane hero--layout is-plain">
-  <div class="hero-inner">
-    <div class="left-panel">
-    <div class="text-content">
-        <h2>บริการออนไลน์</h2>
-        <p class="sub-text">ให้คุณจัดการเรื่องต่าง ๆ ด้วยตัวคุณเอง ตลอด 24 ชั่วโมง</p>
-        <span class="tagline">PROFESSIONAL IT MANAGEMENT SOLUTIONS</span>
+<!-- LEFT / HERO  -->
+<aside class="hero-pane is-soft">
+  <div class="hero-inner two-col">
+    <div class="hero-copy">
+      <h1 class="hero-title">
+        บริการ <span class="accent">ออนไลน์</span>
+      </h1>
+      <p class="hero-sub">ให้คุณจัดการเรื่องต่าง ๆ ด้วยตัวคุณเอง ตลอด 24 ชั่วโมง</p>
+      <p class="hero-tag">PROFESSIONAL IT MANAGEMENT SOLUTIONS</p>
     </div>
-    <div class="mockup">
-        <img src="{{ asset('images/mockup.png') }}" alt="Mockup" />
-    </div>
-</div>
 
+    <figure class="hero-art">
+      {{-- เปลี่ยนให้ตรงกับชื่อไฟล์รูปของคุณ --}}
+      <img src="{{ asset('images/mockup.png') }}" alt="Mascot">
+    </figure>
+  </div>
 </aside>
+
 
 {{-- ====== ฝั่งขวา (Form) – ตามภาพตัวอย่าง ====== --}}
 <section class="form-pane form--card clean">
+<div class="login-right">
+        <img src="{{ asset('images/logo.png') }}" class="logo" alt="Logo"> <!-- เผื่อที่โลโก้ -->
   <h2 class="form-heading">เข้าสู่ระบบ</h2>
 
   @if ($errors->any())
@@ -89,6 +95,7 @@
       </p>
     </div>
   </form>
+ </div>
 </section>
 
 {{-- toggle password --}}

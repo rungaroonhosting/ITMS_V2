@@ -1,0 +1,1333 @@
+/* ========== Poster Dark Gradient Background ========== */
+:root {
+  --c1:#ff512f;   /* orange-red */
+  --c2:#dd2476;   /* pink-magenta */
+  --c3:#7a5cff;   /* purple */
+  --bg:#0f0f1a;   /* dark base */
+}
+
+/* base layout */
+html,body {height:100%;margin:0}
+body {font-family:system-ui, -apple-system, 'Inter', sans-serif; background:var(--bg);}
+
+/* poster background */
+.poster-bg {position:fixed; inset:0; overflow:hidden; z-index:-1}
+.gradient {
+  position:absolute; inset:0;
+  background:linear-gradient(135deg,var(--c1),var(--c2) 40%,var(--c3) 100%);
+}
+.noise {
+  position:absolute; inset:0; opacity:.07; mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/></filter><rect width='200' height='200' filter='url(%23n)' opacity='0.5'/></svg>");
+  background-size:200px 200px;
+}
+
+/* stars */
+.star {
+  position:absolute; width:6px; height:6px; border-radius:50%;
+  background:radial-gradient(circle,#fff,transparent 70%);
+  opacity:.9; animation:twinkle 5s infinite alternate;
+}
+.star.s1{left:20%; top:30%}
+.star.s2{right:15%; top:25%}
+@keyframes twinkle{from{opacity:.3} to{opacity:1}}
+
+/* crosses */
+.cross {
+  position:absolute; width:18px; height:18px;
+  background:transparent;
+}
+.cross:before,.cross:after{
+  content:""; position:absolute; left:50%; top:50%; background:#fff;
+  transform:translate(-50%,-50%);
+}
+.cross:before{width:2px;height:100%}
+.cross:after{width:100%;height:2px}
+.cross.c1{left:12%; top:60%; opacity:.4}
+.cross.c2{right:18%; top:40%; opacity:.6}
+
+/* decorative circles */
+.circle {
+  position:absolute; border-radius:50%; border:2px solid rgba(255,255,255,.2);
+}
+.circle.circ1{width:140px;height:140px;left:8%;top:12%}
+.circle.circ2{width:200px;height:200px;right:10%;bottom:14%}
+
+/* ========== Login Card ========== */
+/* ========== การ์ดล็อกอิน (เน้นกรอบสีขาว) ========== */
+:root{
+  --card:#ffffff;
+  --text:#1f2937;
+  --muted:#6b7280;
+  --placeholder:#9ca3af;
+  --border:#e5e7eb;
+
+  --primaryA:#ff512f; /* ปุ่ม ไล่สีแดงส้ม → ชมพู */
+  --primaryB:#dd2476;
+
+  --r-xl:24px;
+  --shadow-lg:0 28px 100px rgba(0,0,0,.18);
+  --shadow-md:0 16px 50px rgba(0,0,0,.12);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: system-ui, -apple-system, "Kanit", Inter, Segoe UI, Roboto, Arial, sans-serif;
+  color:var(--text);
+}
+
+/* ตัวการ์ดสองคอลัมน์ */
+.login-card{
+  width:min(1180px,96vw);
+  display:grid;grid-template-columns:1.1fr 1fr;
+  background:var(--card);border-radius:var(--r-xl);overflow:hidden;
+  box-shadow:var(--shadow-lg);border:1px solid rgba(255,255,255,.28)
+}
+
+/* ฝั่งซ้าย */
+.hero-pane{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(160deg, rgba(255,255,255,0.15), rgba(255,255,255,0));
+  border-radius:20px 0 0 20px;
+}
+
+.hero-inner{padding:56px 48px;min-height:360px;display:flex;flex-direction:column;justify-content:center}
+.hero-badges{list-style:none;padding:0;margin:0;display:flex;gap:12px}
+.hero-badges li{width:46px;height:46px;border-radius:14px;background:rgba(255,255,255,.18);display:grid;place-items:center;font-size:22px;backdrop-filter:blur(2px);box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 10px 22px rgba(0,0,0,.10)}
+.mascot-slot{width:180px;height:120px;border-radius:16px;background:rgba(255,255,255,.22);display:grid;place-items:center;font-weight:800;letter-spacing:.3px}
+
+/* ฝั่งขวา (ฟอร์ม) */
+.form-pane{
+  padding: 40px 32px;
+}
+.form-pane .form-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin: 12px 0 20px;
+  font-size: .95rem;
+}
+.form-pane .remember{
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+.form-pane .btn-primary{
+  width:100%;
+  background:linear-gradient(90deg,#f97316,#ec4899,#8b5cf6);
+  border-radius:999px;
+  font-weight:600;
+  padding:12px 0;
+  box-shadow:0 4px 14px rgba(0,0,0,.15);
+}
+
+.brand{display:flex;flex-direction:column;align-items:center;gap:6px;margin-bottom:6px}
+.logo-slot{width:80px;height:80px;border-radius:50%;background:rgba(16,24,40,.08);display:grid;place-items:center;font-weight:800;color:#334155}
+.brand-sub{color:var(--muted);font-size:.95rem}
+.form-title{text-align:center;color:#b91c1c;font-weight:900;margin:10px 0 18px;font-size:26px}
+
+/* แจ้งเตือน */
+.alert{border-radius:14px;padding:10px 12px;margin-bottom:12px;font-weight:600}
+.alert.error{background:#fee2e2;border:1px solid #fecaca;color:#991b1b}
+
+/* ฟอร์ม/อินพุต */
+.login-form{display:grid;gap:14px}
+.field{display:grid;gap:6px}
+.field>span{color:var(--muted);font-size:.92rem}
+.input{
+  width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:12px;
+  background:#fff;color:var(--text);font-size:15px;transition:border-color .2s, box-shadow .2s
+}
+.input::placeholder{color:var(--placeholder)}
+.input:focus{outline:none;border-color:#ff6a00;box-shadow:0 0 0 3px rgba(255,106,0,.15)}
+
+/* toggle password */
+.pass-wrap{position:relative}
+.eye{
+  position:absolute;right:8px;top:50%;transform:translateY(-50%);
+  width:38px;height:38px;border:0;border-radius:10px;background:#f1f5ff;cursor:pointer;box-shadow:var(--shadow-md);color:#334155
+}
+
+/* จำการเข้าสู่ระบบ */
+.remember{display:flex;gap:8px;align-items:center;color:var(--muted);margin-top:2px}
+.remember input{accent-color:#ff6a00}
+
+/* ปุ่ม */
+.btn-primary{
+  margin-top:6px;width:100%;display:flex;gap:10px;align-items:center;justify-content:center;
+  border:0;border-radius:12px;padding:12px 16px;
+  background:linear-gradient(90deg,var(--primaryA),var(--primaryB));color:#fff;font-weight:900;letter-spacing:.2px;cursor:pointer;box-shadow:0 6px 18px rgba(221,36,118,.35);transition:transform .12s ease, filter .2s
+}
+.btn-primary:hover{transform:translateY(-2px);filter:brightness(1.03)}
+.btn-primary .arrow{filter:brightness(1.2)}
+.foot{margin-top:auto;text-align:center;color:var(--muted);padding-top:14px}
+
+/* ตอบสนองจอเล็ก */
+@media (max-width:1080px){
+  .login-card{grid-template-columns:1fr}
+  .hero-art{display:none}
+}
+/* ===== ปรับ Hero (ฝั่งซ้าย) ===== */
+.hero-pane--mockup {
+  background: rgba(255,255,255,0.1); /* ขุ่นเล็กน้อย */
+  border-radius: 20px 0 0 20px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.hero-pane--mockup .mockup-slot img {
+  max-width: 90%;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+}
+
+/* ===== ฟอร์ม (ฝั่งขวา) ===== */
+.form-pane--card {
+  background: #fff;
+  border-radius: 0 20px 20px 0;
+  padding: 40px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+}
+
+.form-pane--card .field {
+  display:grid;
+  gap:6px;
+  margin-bottom:16px;
+}
+.form-pane--card input {
+  width:100%;
+  border:1px solid #ddd;
+  border-radius:999px;
+  padding:12px 16px;
+  font-size:1rem;
+  transition:border .2s, box-shadow .2s;
+}
+.form-pane--card input:focus {
+  border-color:#FACC15;
+  box-shadow:0 0 0 4px rgba(250,204,21,0.3);
+}
+
+/* ปุ่ม login */
+.btn-login {
+  width:100%;
+  border:0;
+  border-radius:999px;
+  padding:12px 16px;
+  font-weight:600;
+  background:linear-gradient(to right,#FACC15,#FDE047);
+  color:#000;
+  cursor:pointer;
+  transition:opacity .15s, transform .05s;
+}
+.btn-login:hover { opacity:.95; }
+.btn-login:active { transform:translateY(1px); }
+
+/* ฟุตโน้ต / meta */
+.form-meta {
+  margin-top:16px;
+  text-align:center;
+  font-size:.9rem;
+  color:#666;
+}
+/* ===== Logo ===== */
+.form-pane--card .brand-logo {
+  text-align:center;
+  margin-bottom:20px;
+}
+.form-pane--card .brand-logo img {
+  max-height:60px;
+  width:auto;
+}
+
+/* ===== Hero left overlay ===== */
+.hero-pane {
+  position:relative;
+  color:#fff; /* ตัวหนังสืออ่านง่าย */
+}
+.hero-pane::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.25); /* overlay มืดเล็กน้อย */
+  border-radius:20px 0 0 20px;
+}
+.hero-pane .hero-inner {
+  position:relative;
+  z-index:1;
+}
+
+/* ===== Button: gradient ตามพื้นหลัง ===== */
+.btn-login, .form-pane .btn-primary {
+  background:linear-gradient(90deg,#f97316,#ec4899,#8b5cf6); /* ส้ม → ชมพู → ม่วง */
+  color:#fff;
+}
+.btn-login:hover { opacity:.9; }
+/* ---------- ฝั่งซ้าย: overlay ให้เข้ากับพื้นหลัง (ไม่เทา) ---------- */
+.hero-pane {
+  position: relative;
+  color: #fff;
+}
+.hero-pane::before{
+  content:"";
+  position:absolute; inset:0;
+  /* ไล่สีใสโทนเดียวกับพื้นหลัง เพื่อให้อ่านง่าย ไม่เทา */
+  background: linear-gradient(120deg,
+              rgba(255,255,255,.14),
+              rgba(255,255,255,.10) 40%,
+              rgba(255,255,255,.08));
+  border-radius: 20px 0 0 20px;
+  backdrop-filter: saturate(120%) blur(2px);
+}
+.hero-pane .hero-inner{ position:relative; z-index:1; }
+
+/* ---------- ฟอร์มฝั่งขวา (การ์ดขาว) ---------- */
+.form-pane.form-pane--card{
+  background:#fff;
+  border-radius: 0 20px 20px 0;
+  padding: clamp(24px, 3.5vw, 40px);
+  box-shadow: 0 10px 30px rgba(0,0,0,.12);
+}
+
+/* โลโก้บนฟอร์ม */
+.form-pane--card .brand-logo{ text-align:center; margin-bottom: 16px; }
+.form-pane--card .brand-logo img{ max-height:60px; width:auto; }
+
+/* fields */
+.form-pane .field{ display:grid; gap:6px; margin-bottom:14px; }
+.form-pane .field .input{
+  width:100%;
+  border:1px solid #e5e7eb;
+  border-radius:999px;
+  padding:12px 16px;
+  background:#fff;
+  outline:none;
+  transition: border .15s, box-shadow .15s;
+}
+.form-pane .field .input:focus{
+  border-color:#e879f9; /* โทนเดียวกับพื้นหลัง */
+  box-shadow:0 0 0 4px rgba(232,121,249,.25);
+}
+.form-pane .error-text{ color:#ef4444; font-size:.85rem; }
+
+/* ปุ่มตา โชว์/ซ่อนรหัสผ่าน */
+.form-pane .pass-wrap{ position:relative; }
+.form-pane .pass-wrap .eye{
+  position:absolute; right:10px; top:36px;
+  border:0; background:transparent; cursor:pointer;
+  font-size:16px; opacity:.7;
+}
+.form-pane .pass-wrap .eye:hover{ opacity:1; }
+
+/* เส้นคั่นเหนือ remember (ไม่ใช่ input) */
+.form-pane .thin-sep{ height:6px; background:transparent; margin:2px 0 8px; }
+
+/* remember + forgot */
+.form-pane .form-row{
+  display:flex; align-items:center; justify-content:space-between;
+  margin:0 0 16px;
+}
+.form-pane .link{ color:#374151; text-decoration:none; }
+.form-pane .link:hover{ text-decoration:underline; }
+
+/* ปุ่มเข้าสู่ระบบ: gradient โทนพื้นหลัง + ลูกเล่นเงา/gloss */
+.form-pane .btn-primary{
+  position:relative;
+  display:inline-flex; align-items:center; justify-content:center;
+  width:100%;
+  border:0; border-radius:999px;
+  padding:12px 16px; font-weight:800;
+  color:#fff; letter-spacing:.2px;
+  background:linear-gradient(90deg,#fb923c 0%, #ec4899 50%, #8b5cf6 100%);
+  box-shadow: 0 10px 18px rgba(139,92,246,.22);
+  transition: transform .06s ease, box-shadow .15s ease, opacity .15s ease;
+}
+.form-pane .btn-primary:hover{ opacity:.96; box-shadow:0 14px 24px rgba(139,92,246,.28); }
+.form-pane .btn-primary:active{ transform: translateY(1px); }
+
+/* แถบเงาวาววิ่งบนปุ่ม */
+.form-pane .btn-primary::after{
+  content:""; position:absolute; inset:0;
+  background: linear-gradient( to right,
+              rgba(255,255,255,.18) 0%,
+              rgba(255,255,255,0) 40%,
+              rgba(255,255,255,.18) 60%,
+              rgba(255,255,255,0) 100% );
+  border-radius:inherit;
+  transform: translateX(-120%);
+  transition: transform .6s ease;
+  pointer-events:none;
+}
+.form-pane .btn-primary:hover::after{ transform: translateX(120%); }
+
+/* ส่วนล่าง: “ยังไม่ได้ลงทะเบียน….” */
+.form-pane .meta{ margin-top:16px; }
+.form-pane .meta .sep{ height:1px; background:#e5e7eb; margin:16px 0; }
+.form-pane .muted{ color:#6b7280; }
+.form-pane .center{ text-align:center; }
+.form-pane .register{ display:flex; justify-content:center; gap:10px; align-items:center; margin-top:6px; }
+.form-pane .register .link{ display:inline-flex; align-items:center; gap:6px; }
+.form-pane .register .dot{ opacity:.4; }
+
+/* Input fields */
+.form-pane .field { margin-bottom: 16px; display: grid; gap: 4px; }
+.form-pane .input {
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 999px;
+  padding: 12px 16px;
+  background: #fff;
+}
+.form-pane .input:focus {
+  border-color: #ec4899;
+  box-shadow: 0 0 0 3px rgba(236,72,153,.25);
+}
+
+/* Eye button */
+.pass-wrap { position: relative; }
+.pass-wrap .eye {
+  position: absolute;
+  right: 14px;
+  top: 38px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  opacity: .6;
+}
+.pass-wrap .eye:hover { opacity: 1; }
+
+/* Remember + Forgot */
+.form-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 12px 0 20px;
+}
+.form-row .remember {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: .9rem;
+}
+
+/* Submit button */
+.btn-primary {
+  display: inline-block;
+  width: 100%;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 999px;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(90deg,#fb923c,#ec4899,#8b5cf6);
+  box-shadow: 0 6px 16px rgba(0,0,0,.15);
+  cursor: pointer;
+  transition: all .2s;
+}
+.btn-primary:hover { transform: translateY(-1px); opacity:.95; }
+.btn-primary:active { transform: translateY(1px); }
+
+/* Register section */
+.meta { margin-top: 20px; text-align: center; }
+.meta .sep { height: 1px; background: #e5e7eb; margin: 16px 0; }
+.register {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  font-size: .9rem;
+}
+.register .link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  color: #374151;
+}
+.register .link:hover { text-decoration: underline; }
+.register .dot { opacity: .5; }
+/* ============ HERO (ซ้าย): จัด Mockup ให้พอดี ============ */
+.hero-pane .mock-card{
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+  width: min(480px, 90%);
+  margin: auto;
+}
+.hero-pane .mock-card img{
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* จอเล็กลง ปรับขนาดลงอัตโนมัติ */
+@media (max-width: 1024px){
+  .hero-pane.is-soft .hero-inner{ grid-template-columns: 1fr; }
+  .hero-art{ justify-self:center; }
+  .hero-tag{ white-space: normal; }
+}
+@media (max-width: 768px){
+  .hero-pane .mock-card{ width: min(460px, 92%); aspect-ratio: 4 / 5; }
+}
+
+/* ============ FORM (ขวา): เก็บระเบียบ ============ */
+/* ลด margin หัวข้อให้เรียบ */
+.form-pane .form-title{ margin: 4px 0 14px; }
+
+/* input capsule มาตรฐานเดียวกัน */
+.form-pane .field{ display:grid; gap:6px; margin-bottom:14px; }
+.form-pane .field .input{
+  width:100%; padding:12px 16px;
+  border:1px solid #e5e7eb; border-radius:999px;
+  background:#fff; outline:none;
+  transition:border .15s, box-shadow .15s;
+}
+.form-pane .field .input:focus{
+  border-color:#ec4899; box-shadow:0 0 0 3px rgba(236,72,153,.25);
+}
+.form-pane .error-text{ color:#ef4444; font-size:.85rem; }
+
+/* ปุ่มตาให้ “ลอยทับ” กลางแนวตั้งเสมอ */
+.form-pane .pass-wrap{ position: relative; }
+.form-pane .pass-wrap .eye{
+  position:absolute; right:12px; top:50%; transform:translateY(-6px);
+  border:0; background:transparent; cursor:pointer; opacity:.65;
+}
+.form-pane .pass-wrap .eye:hover{ opacity:1; }
+
+/* แถวจำฉัน + ลืมรหัส: จัดสองข้างให้ตรงบรรทัด */
+.form-pane .form-row{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:12px; margin:6px 0 18px;
+}
+.form-pane .remember{ display:inline-flex; align-items:center; gap:8px; font-size:.95rem; }
+.form-pane .link{ color:#374151; text-decoration:none; }
+.form-pane .link:hover{ text-decoration:underline; }
+
+/* ลบ “แท่งรี ๆ” ที่เผลอโผล่เหนือแถวจำฉัน */
+.form-pane .thin-sep{ display:none; }
+
+/* ปุ่ม Login: gradient โทนพื้นหลัง + เงาและแสงวิ่ง */
+.form-pane .btn-primary{
+  position:relative;
+  display:inline-flex; align-items:center; justify-content:center;
+  width:100%; padding:12px 16px; border:0; border-radius:999px;
+  font-weight:800; color:#fff; letter-spacing:.2px;
+  background:linear-gradient(90deg,#fb923c,#ec4899,#8b5cf6);
+  box-shadow:0 10px 18px rgba(139,92,246,.20);
+  transition:transform .06s, box-shadow .15s, opacity .15s;
+}
+.form-pane .btn-primary:hover{ opacity:.96; box-shadow:0 14px 26px rgba(139,92,246,.28); }
+.form-pane .btn-primary:active{ transform:translateY(1px); }
+.form-pane .btn-primary::after{
+  content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none;
+  background:linear-gradient(90deg,rgba(255,255,255,.18),rgba(255,255,255,0) 45%,rgba(255,255,255,.18) 60%,rgba(255,255,255,0));
+  transform:translateX(-120%); transition:transform .6s ease;
+}
+.form-pane .btn-primary:hover::after{ transform:translateX(120%); }
+
+/* ส่วน Register ล่าง: จัดกลาง + ไอคอน */
+.form-pane .meta{ margin-top:18px; }
+.form-pane .meta .sep{ height:1px; background:#e5e7eb; margin:16px 0; }
+.form-pane .muted{ color:#6b7280; }
+.form-pane .center{ text-align:center; }
+.form-pane .register{
+  display:flex; justify-content:center; align-items:center; gap:14px; margin-top:6px;
+}
+.form-pane .register .link{ display:inline-flex; align-items:center; gap:6px; color:#374151; }
+.form-pane .register .link:hover{ text-decoration:underline; }
+.form-pane .register .dot{ opacity:.45; }
+
+/* =========================
+   LEFT (HERO) — สีพื้นหลัง + รูป mockup
+   ========================= */
+
+/* ให้ฝั่งซ้ายกลืนกับ bg หลัก (ส้ม→ชมพู→ม่วง ใส ๆ) */
+.hero-pane.hero-pane--tint{
+  position: relative;
+  border-radius: 20px 0 0 20px;
+  /* เลเยอร์สีใส โทนเดียวกับพื้นหลัง */
+  background: linear-gradient(140deg,
+              rgba(251,146,60,.18) 0%,
+              rgba(236,72,153,.14) 45%,
+              rgba(139,92,246,.12) 100%);
+}
+
+/* รูป mockup: เอาขอบ/เงาออกให้หมด, scale พอดีช่อง, ไม่บิด */
+.hero-pane .mock-card{
+  width: min(520px, 92%);
+  margin: clamp(10px,2vw,18px) auto;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  overflow: hidden;
+}
+.hero-pane .mock-card img{
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+/* จอเล็กลงปรับอัตโนมัติ */
+@media (max-width: 1024px){ .hero-pane .mock-card{ width: min(480px, 92%); } }
+@media (max-width: 768px){  .hero-pane .mock-card{ width: min(440px, 94%); } }
+
+/* =========================
+   RIGHT (FORM) — เก็บระเบียบ
+   ========================= */
+
+/* อินพุตทรงแคปซูลมาตรฐานเดียวกัน */
+.form-pane .field{ display:grid; gap:6px; margin-bottom:14px; }
+.form-pane .field .input{
+  width:100%; padding:12px 16px;
+  border:1px solid #e5e7eb; border-radius:999px;
+  background:#fff; outline:none;
+  transition: border .15s, box-shadow .15s;
+}
+.form-pane .field .input:focus{
+  border-color:#ec4899; box-shadow:0 0 0 3px rgba(236,72,153,.25);
+}
+.form-pane .error-text{ color:#ef4444; font-size:.85rem; }
+
+/* ปุ่ม "ตา" โชว์/ซ่อนรหัสผ่าน ให้อยู่ระดับเดียวกับ input เสมอ */
+.form-pane .pass-wrap{ position: relative; }
+.form-pane .pass-wrap .eye{
+  position:absolute; right:12px; top:50%;
+  transform: translateY(-50%);
+  border:0; background:transparent; cursor:pointer;
+  opacity:.65;
+}
+.form-pane .pass-wrap .eye:hover{ opacity:1; }
+
+/* แถว "จดจำการเข้าสู่ระบบ | ลืมรหัสผ่าน?" ให้ตรงบรรทัด */
+.form-pane .form-row{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:12px; margin: 10px 0 18px;
+  font-size:.95rem;
+}
+/* ป้องกัน checkbox ถูกสไตล์แบบ input capsule */
+.form-pane input[type="checkbox"]{
+  appearance: auto; -webkit-appearance: auto;
+  width:16px; height:16px; margin:0;
+  border:1px solid #cbd5e1; border-radius:4px;
+  box-shadow:none; background:transparent; padding:0;
+}
+.form-pane .remember{ display:inline-flex; align-items:center; gap:8px; }
+
+/* ลบแท่งรี ๆ ที่เผลอโผล่เหนือแถวจำฉัน */
+.form-pane .thin-sep{ display:none; }
+
+/* ปุ่มเข้าสู่ระบบ: gradient โทนเดียวกับพื้นหลัง + เงาและแสงวิ่ง */
+.form-pane .btn-primary{
+  position:relative;
+  display:inline-flex; align-items:center; justify-content:center;
+  width:100%; padding:12px 16px;
+  border:0; border-radius:999px; font-weight:800; color:#fff;
+  background:linear-gradient(90deg,#fb923c 0%, #ec4899 50%, #8b5cf6 100%);
+  box-shadow:0 10px 18px rgba(139,92,246,.20);
+  transition: transform .06s, box-shadow .15s, opacity .15s;
+}
+.form-pane .btn-primary:hover{ opacity:.96; box-shadow:0 14px 26px rgba(139,92,246,.28); }
+.form-pane .btn-primary:active{ transform:translateY(1px); }
+.form-pane .btn-primary::after{
+  content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none;
+  background:linear-gradient(90deg,rgba(255,255,255,.18),rgba(255,255,255,0) 45%,rgba(255,255,255,.18) 60%,rgba(255,255,255,0));
+  transform:translateX(-120%); transition:transform .6s ease;
+}
+.form-pane .btn-primary:hover::after{ transform:translateX(120%); }
+
+/* ส่วน “ยังไม่ได้ลงทะเบียน…?” ให้เหมือนตัวอย่างภาพที่ 2 */
+.form-pane .meta{ margin-top:18px; }
+.form-pane .meta .sep{ height:1px; background:#e5e7eb; margin:16px 0; }
+.form-pane .muted{ color:#6b7280; }
+.form-pane .center{ text-align:center; }
+.form-pane .register{
+  display:flex; justify-content:center; align-items:center;
+  gap:14px; margin-top:6px; color:#374151;
+}
+.form-pane .register .link{ display:inline-flex; align-items:center; gap:6px; text-decoration:none; }
+.form-pane .register .link:hover{ text-decoration:underline; }
+.form-pane .register .dot{ opacity:.45; }
+
+/* =======================
+   HERO LEFT — เพิ่มคอนทราสต์ข้อความ + จัดรูป
+   ======================= */
+
+/* ดาร์กโอเวอร์เลย์ใส ๆ ช่วยให้ตัวหนังสืออ่านชัด */
+.hero-pane.hero-contrast { position: relative; }
+.hero-pane.hero-contrast::before{
+  content:""; position:absolute; inset:0; border-radius:20px 0 0 20px;
+  /* โทนเข้มบาง ๆ คลุมพื้นหลังเดิม */
+  background:
+    radial-gradient(60% 60% at 40% 35%, rgba(0,0,0,.28), rgba(0,0,0,0) 70%),
+    linear-gradient(140deg, rgba(0,0,0,.18), rgba(0,0,0,.08));
+  pointer-events:none;
+}
+.hero-pane .hero-inner{ position:relative; z-index:1; }
+
+/* ทำให้ข้อความอ่านง่ายขึ้น */
+.hero-title{ color:#fff; text-shadow:0 2px 8px rgba(0,0,0,.35); }
+.hero-sub, .hero-tag{ color:#f3f4f6; text-shadow:0 1px 4px rgba(0,0,0,.28); }
+
+/* จัด mockup: ไม่มีกรอบ/เงา, ขนาดพอดี */
+.hero-pane .mock-card{
+  width:min(520px, 92%);
+  margin: clamp(12px,2vw,18px) auto 8px;
+  background: transparent; border:0; border-radius:0; box-shadow:none; overflow:hidden;
+}
+.hero-pane .mock-card img{
+  display:block; width:100%; height:auto; object-fit:contain; object-position: center;
+}
+@media (max-width:1024px){ .hero-pane .mock-card{ width:min(480px, 92%); } }
+@media (max-width:768px){ .hero-pane .mock-card{ width:min(440px, 94%); } }
+
+/* =======================
+   FORM RIGHT — เก็บระเบียบ + ฟุตเตอร์ใหม่
+   ======================= */
+
+/* แถว remember | ลืมรหัส ให้ตรงบรรทัดเสมอ */
+.form-pane .form-row{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:12px; margin:10px 0 18px; font-size:.95rem;
+}
+.form-pane .remember{ display:inline-flex; align-items:center; gap:8px; }
+.form-pane input[type="checkbox"]{
+  appearance:auto; -webkit-appearance:auto; width:16px; height:16px; margin:0;
+  border:1px solid #cbd5e1; border-radius:4px; background:transparent;
+}
+
+/* ปุ่มตาโชว์/ซ่อนรหัสผ่าน อยู่กึ่งกลางแนวตั้ง */
+.form-pane .pass-wrap{ position:relative; }
+.form-pane .pass-wrap .eye{
+  position:absolute; right:12px; top:50%; transform:translateY(-50%);
+  border:0; background:transparent; opacity:.65; cursor:pointer;
+}
+.form-pane .pass-wrap .eye:hover{ opacity:1; }
+
+/* ปุ่มหลัก: โทนเดียวกับพื้นหลัง + แสงวิ่ง */
+.form-pane .btn-primary{
+  position:relative; display:inline-flex; align-items:center; justify-content:center;
+  width:100%; padding:12px 16px; border:0; border-radius:999px; font-weight:800; color:#fff;
+  background:linear-gradient(90deg,#fb923c 0%, #ec4899 50%, #8b5cf6 100%);
+  box-shadow:0 10px 18px rgba(139,92,246,.20);
+  transition:transform .06s, box-shadow .15s, opacity .15s;
+}
+.form-pane .btn-primary:hover{ opacity:.96; box-shadow:0 14px 26px rgba(139,92,246,.28); }
+.form-pane .btn-primary:active{ transform:translateY(1px); }
+.form-pane .btn-primary::after{
+  content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none;
+  background:linear-gradient(90deg,rgba(255,255,255,.18),rgba(255,255,255,0) 45%,rgba(255,255,255,.18) 60%,rgba(255,255,255,0));
+  transform:translateX(-120%); transition:transform .6s ease;
+}
+.form-pane .btn-primary:hover::after{ transform:translateX(120%); }
+
+/* meta ล่าง: ไม่มีลิงก์ลงทะเบียนแล้ว ใส่เครดิตแทน */
+.form-pane .meta{ margin-top:18px; text-align:center; }
+.form-pane .meta .sep{ height:1px; background:#e5e7eb; margin:16px 0; }
+.form-pane .foot{ color:#6b7280; font-size:.92rem; }
+.form-pane .foot .dot{ margin:0 .5rem; opacity:.5; }
+.form-pane .foot .by em{ font-style:italic; }
+
+/* ======================
+   HERO LAYOUT & BACKDROP
+   ====================== */
+.hero-pane.hero-right .hero-inner{
+  display:flex; flex-direction:column; gap:18px;
+  align-items:flex-start;              /* ตัวหนังสือชิดซ้าย */
+  justify-content:space-between;
+  min-height:100%;
+  padding-inline: clamp(16px,2.4vw,28px);
+}
+
+/* พื้นหลังฝั่งซ้าย: ไล่สีใสโทนเดียวกับ bg + vignette เบา ๆ */
+.hero-pane.hero-contrast.hero-right{
+  position:relative; border-radius:20px 0 0 20px; overflow:hidden;
+  background:
+    radial-gradient(120% 100% at 0% 0%, rgba(255,255,255,.18) 0%, rgba(255,255,255,.06) 55%, rgba(255,255,255,0) 80%),
+    linear-gradient(150deg, rgba(251,146,60,.18), rgba(236,72,153,.14) 45%, rgba(139,92,246,.12) 100%);
+}
+.hero-pane.hero-contrast.hero-right::before{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background:
+    radial-gradient(90% 70% at 80% 20%, rgba(0,0,0,.18), transparent 70%),
+    radial-gradient(120% 120% at 10% 90%, rgba(0,0,0,.10), transparent 70%);
+  mix-blend-mode:soft-light;
+}
+
+/* รูป mockup: ชิดขวา, ไม่บิด, ไม่มีขอบ/เงา */
+.hero-pane .mock-card{ width:min(540px, 92%); margin:auto; background:transparent; box-shadow:none; border:0; }
+.hero-pane .mock-card.mock-right{ margin-left:auto; } /* ดันไปขวา */
+.hero-pane .mock-card img{ width:100%; height:auto; object-fit:contain; display:block; }
+
+@media (max-width:1024px){ .hero-pane .mock-card{ width:min(500px, 92%); } }
+@media (max-width:768px){  .hero-pane .mock-card{ width:min(460px, 94%); } }
+
+/* ==============
+   SPEECH BUBBLE
+   ============== */
+.speech-box{
+  position:relative;
+  max-width:min(540px, 90%);
+  padding:16px 18px;
+  border-radius:16px;
+  background: rgba(255,255,255,.18);
+  backdrop-filter: blur(4px) saturate(120%);
+  box-shadow: 0 6px 18px rgba(0,0,0,.12) inset, 0 1px 0 rgba(255,255,255,.5);
+  color:#fff;
+}
+.speech-box::after{
+  /* หางกล่องคำพูด ชี้ไปทางรูปด้านขวา */
+  content:""; position:absolute; right:-14px; top:38px;
+  width:16px; height:16px; transform:rotate(45deg);
+  background:inherit; border-radius:3px;
+  box-shadow: 0 1px 0 rgba(255,255,255,.5);
+}
+.hero-title{ color:#fff; text-shadow:0 2px 8px rgba(0,0,0,.35); margin:0 0 4px; }
+.hero-sub, .hero-tag{ color:#f3f4f6; text-shadow:0 1px 4px rgba(0,0,0,.28); margin:.1rem 0; }
+
+/* ======================
+   FORM – FIX EYE BUTTON
+   ====================== */
+/* เพิ่มพื้นที่ด้านขวาของ input เพื่อกันไม่ให้ตัวหนังสือชนปุ่มตา */
+.form-pane .field .input{ padding-right: 56px; }
+
+.form-pane .pass-wrap{ position:relative; }
+.form-pane .pass-wrap .eye{
+  position:absolute; right:10px; top:50%; transform:translateY(-50%);
+  width:34px; height:34px; border-radius:10px;
+  display:grid; place-items:center;
+  border:0; cursor:pointer;
+  background: radial-gradient(60% 60% at 50% 40%, rgba(0,0,0,.05), rgba(0,0,0,0)),
+              rgba(255,255,255,.8);
+  box-shadow: 0 4px 16px rgba(0,0,0,.12), 0 0 0 1px rgba(0,0,0,.05) inset;
+  opacity:.9;
+}
+.form-pane .pass-wrap .eye:hover{ opacity:1; }
+
+/* remember | forgot ให้ตรงบรรทัดเสมอ */
+.form-pane .form-row{ display:flex; align-items:center; justify-content:space-between; gap:12px; }
+
+/* ปุ่ม login (คงโทนเดิม) – เงาหยดเล็กน้อย */
+.form-pane .btn-primary{ box-shadow: 0 10px 18px rgba(139,92,246,.20), 0 2px 0 rgba(255,255,255,.6) inset; }
+
+/* === FIX: Mockup ด้านซ้ายล้น / บังคับสเกล + ชิดขวา === */
+.hero-pane .mock-card{
+  /* ดันไปชิดขวาเสมอ */
+  margin-left: auto !important;
+
+  /* จำกัดความกว้าง: ระหว่าง 260px ถึง 520px หรือ 38vw */
+  width: clamp(260px, 38vw, 520px) !important;
+
+  /* ตัดส่วนเกินหากมี */
+  overflow: hidden;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+.hero-pane .mock-card img{
+  display: block;
+  width: 100%;
+  height: auto;
+
+  /* จำกัดความสูงตาม viewport ไม่ให้ล้นกรอบ (เลือกต่ำสุดของ 60vh หรือ 640px) */
+  max-height: min(60vh, 640px) !important;
+  object-fit: contain;
+  object-position: center;
+}
+
+/* จอใหญ่พิเศษ: อนุญาตให้สูงขึ้นนิดหน่อย */
+@media (min-height: 900px){
+  .hero-pane .mock-card img{ max-height: min(66vh, 720px) !important; }
+}
+
+/* จอเล็ก/แคบ: ลดสเกลลงอีก */
+@media (max-width: 1024px){
+  .hero-pane .mock-card{ width: clamp(240px, 44vw, 480px) !important; }
+  .hero-pane .mock-card img{ max-height: min(54vh, 600px) !important; }
+}
+@media (max-width: 768px){
+  .hero-pane .mock-card{ width: clamp(220px, 80vw, 460px) !important; }
+  .hero-pane .mock-card img{ max-height: min(48vh, 520px) !important; }
+}
+
+/* === FIX: ปุ่มตา (ดูรหัสผ่าน) ให้อยู่กึ่งกลางและไม่ทับข้อความ === */
+.form-pane .field .input{ padding-right: 56px; }
+.form-pane .pass-wrap{ position: relative; }
+.form-pane .pass-wrap .eye{
+  position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+  width: 34px; height: 34px; border-radius: 10px; border: 0;
+  display: grid; place-items: center; cursor: pointer;
+  background: radial-gradient(60% 60% at 50% 40%, rgba(0,0,0,.05), transparent),
+             rgba(255,255,255,.85);
+  box-shadow: 0 4px 16px rgba(0,0,0,.12), 0 0 0 1px rgba(0,0,0,.05) inset;
+  opacity: .9;
+}
+.form-pane .pass-wrap .eye:hover{ opacity: 1; }
+
+/* === FIX: แถว “จดจำการเข้าสู่ระบบ | ลืมรหัสผ่าน?” ไม่ให้แตกบรรทัด === */
+.form-pane .form-row{
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; margin: 10px 0 18px; font-size: .95rem;
+}
+.form-pane input[type="checkbox"]{
+  appearance: auto; -webkit-appearance: auto;
+  width: 16px; height: 16px; margin: 0;
+  border: 1px solid #cbd5e1; border-radius: 4px; background: transparent;
+}
+
+/* ========== Layout base (คงพื้นหลังหลักของโปรเจ็กต์) ========== */
+.login-shell { width: 100%; min-height: 100vh; display: grid; place-items: center; }
+.login-card  { width: min(1200px, 94vw); border-radius: 24px; display: grid; grid-template-columns: 1.05fr 1fr; overflow: hidden; }
+
+/* ========== Left (Hero) ========== */
+.hero--layout{
+  position: relative;
+  background: linear-gradient(180deg, rgba(255,255,255,.75), rgba(255,255,255,.6));
+}
+.hero-inner{ position: relative; height: 100%; padding: clamp(20px, 3vw, 32px) clamp(22px, 3vw, 36px); }
+.hero-copy{ max-width: 560px; }
+.hero-title{ font-size: clamp(34px, 4.6vw, 56px); line-height: 1.1; font-weight: 900; color: #6D28D9; letter-spacing: .2px; margin: 0 0 10px; }
+.hero-sub{ color:#5B21B6; opacity:.9; margin: 0 0 6px; font-weight:600; }
+.hero-tag{ color:#6D28D9; font-weight: 800; letter-spacing:.8px; }
+
+.hero-mascot{
+  position: absolute; right: clamp(18px, 2.6vw, 30px); bottom: clamp(10px, 2.6vw, 22px);
+  width: clamp(260px, 33vw, 420px); /* คุมกว้างของรูป */
+}
+.hero-mascot img{
+  display:block; width:100%; height:auto; object-fit: contain;
+  max-height: min(56vh, 560px); /* คุมสูงไม่ให้ล้น */
+}
+
+/* ========== Right (Form) ========== */
+.form--card{ background:#fff; padding: clamp(22px, 3.2vw, 36px) clamp(22px, 3.2vw, 40px); }
+.form-heading{ text-align:center; font-size: clamp(22px, 2.4vw, 28px); color:#B91C1C; margin: 4px 0 18px; font-weight: 900; }
+
+.field{ display:grid; gap:6px; margin-bottom:14px; }
+.field > span{ font-weight:700; color:#374151; }
+.input{
+  width:100%; border:1px solid #e5e7eb; border-radius:999px;
+  padding:12px 16px; background:#fff; outline:none;
+  transition:border .15s, box-shadow .15s;
+}
+.input:focus{ border-color:#A78BFA; box-shadow:0 0 0 3px rgba(167,139,250,.25); }
+
+/* password eye */
+.pass-wrap{ position:relative; }
+.pass-wrap .input{ padding-right:56px; }
+.eye{
+  position:absolute; right:10px; top:50%; transform:translateY(-50%);
+  width:34px; height:34px; display:grid; place-items:center; border:0; cursor:pointer;
+  border-radius:12px;
+  background: radial-gradient(60% 60% at 50% 40%, rgba(0,0,0,.04), transparent), rgba(255,255,255,.9);
+  box-shadow: 0 4px 14px rgba(0,0,0,.12), 0 0 0 1px rgba(0,0,0,.05) inset;
+  opacity: .9;
+}
+.eye:hover{ opacity:1; }
+
+/* remember + forgot */
+.form-row{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin: 6px 0 18px; font-size:.95rem; }
+.remember{ display:inline-flex; gap:8px; align-items:center; color:#374151; }
+.form-row .link{ color:#374151; text-decoration:none; }
+.form-row .link:hover{ text-decoration:underline; }
+input[type="checkbox"]{ appearance:auto; -webkit-appearance:auto; width:16px; height:16px; margin:0; }
+
+/* submit button (gradient โทนเดียวกับพื้นหลัง) */
+.btn-primary{
+  width:100%; border:0; border-radius:999px; padding:12px 16px; color:#fff; font-weight:900;
+  background: linear-gradient(90deg, #FB923C 0%, #EC4899 50%, #8B5CF6 100%);
+  box-shadow: 0 10px 18px rgba(139,92,246,.2), 0 2px 0 rgba(255,255,255,.6) inset;
+  transition: transform .06s, box-shadow .15s, opacity .15s;
+}
+.btn-primary:hover{ opacity:.96; box-shadow: 0 14px 26px rgba(139,92,246,.28), 0 2px 0 rgba(255,255,255,.7) inset; }
+.btn-primary:active{ transform: translateY(1px); }
+
+/* meta footer */
+.meta{ margin-top: 18px; }
+.sep{ height:1px; background:#e5e7eb; margin:16px 0; }
+.foot{ text-align:center; color:#6b7280; font-size:.92rem; }
+.foot .dot{ margin:0 .6rem; opacity:.45; }
+.foot em{ font-style: italic; }
+
+/* ========== Responsive tweaks ========== */
+@media (max-width: 1024px){
+  .login-card{ grid-template-columns: 1fr; }
+  .hero--layout{ min-height: 46vh; }
+  .form--card{ border-top: 1px solid rgba(0,0,0,.06); }
+  .hero-mascot{ position: absolute; right: 20px; bottom: 14px; width: clamp(220px, 46vw, 420px); }
+  .hero-mascot img{ max-height: min(42vh, 460px); }
+}
+/* ===== HERO (ซ้าย) – layout เหมือนรูปแรก ===== */
+.hero--layout.is-plain{ background: linear-gradient(180deg, rgba(255,255,255,.78), rgba(255,255,255,.64)); }
+.hero-inner{ padding: clamp(20px,3vw,32px); }
+.hero-row{ display:grid; grid-template-columns: 1.1fr .9fr; align-items:center; gap: clamp(18px,2.4vw,28px); }
+
+.hero-copy{ max-width: 620px; }
+.u-purple{ color:#6D28D9; } .u-purple-600{ color:#5B21B6; } .u-purple-700{ color:#6D28D9; }
+.hero-title{ font-size: clamp(40px, 5vw, 64px); line-height:1.08; font-weight: 900; letter-spacing:.3px; margin:0 0 10px; }
+.hero-sub{ margin:0 0 8px; font-weight:600; opacity:.95; }
+.hero-tag{ margin:0; font-weight:800; letter-spacing:.8px; }
+
+.hero-mascot{ justify-self:end; }
+.hero-mascot--small{ width: clamp(260px, 28vw, 380px); }
+.hero-mascot img{ display:block; width:100%; height:auto; object-fit:contain; max-height:min(54vh,520px); }
+
+/* ปรับสำหรับจอเล็กให้สองคอลัมน์กลายเป็นหนึ่งคอลัมน์ */
+@media (max-width: 1024px){
+  .hero-row{ grid-template-columns: 1fr; }
+  .hero-mascot{ justify-self:center; }
+}
+
+/* ===== FORM (ขวา) – สไตล์เหมือนภาพ ===== */
+.form--card.clean{
+  background:#fff;
+  padding: clamp(22px, 3.2vw, 40px);
+}
+.form-heading{
+  text-align:center; color:#B91C1C; font-weight:900;
+  font-size: clamp(22px, 2.4vw, 28px); margin: 8px 0 20px;
+}
+
+/* fields */
+.form-pane .field{ display:grid; gap:6px; margin-bottom:14px; }
+.form-pane .field > span{ font-weight:700; color:#374151; }
+.form-pane .input{
+  width:100%; border:1px solid #e5e7eb; border-radius:999px;
+  padding:12px 16px; background:#fff; outline:none;
+  transition:border .15s, box-shadow .15s;
+}
+.form-pane .input:focus{ border-color:#A78BFA; box-shadow:0 0 0 3px rgba(167,139,250,.25); }
+
+/* eye button นุ่ม ๆ อยู่กึ่งกลาง */
+.form-pane .pass-wrap{ position:relative; }
+.form-pane .pass-wrap .input{ padding-right:56px; }
+.form-pane .eye.soft{
+  position:absolute; right:10px; top:50%; transform:translateY(-50%);
+  width:34px; height:34px; border:0; border-radius:12px;
+  display:grid; place-items:center; cursor:pointer;
+  background: radial-gradient(60% 60% at 50% 40%, rgba(0,0,0,.04), transparent),
+             rgba(255,255,255,.9);
+  box-shadow:0 4px 14px rgba(0,0,0,.12), 0 0 0 1px rgba(0,0,0,.05) inset;
+  opacity:.92;
+}
+.form-pane .eye.soft:hover{ opacity:1; }
+
+/* remember + forgot บรรทัดเดียว */
+.form-pane .form-row{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:12px; margin: 8px 0 18px; font-size:.95rem;
+}
+.form-pane .remember{ display:inline-flex; gap:8px; align-items:center; color:#374151; }
+.form-pane .link{ color:#374151; text-decoration:none; }
+.form-pane .link:hover{ text-decoration:underline; }
+.form-pane input[type="checkbox"]{
+  appearance:auto; -webkit-appearance:auto; width:16px; height:16px; margin:0;
+  border:1px solid #cbd5e1; border-radius:4px;
+}
+
+/* ปุ่มไล่สี + เงา + ความกว้างเต็ม ตามภาพ */
+.form-pane .btn-primary.wide{
+  width:100%; border:0; border-radius:999px; padding:12px 16px;
+  color:#fff; font-weight:900;
+  background:linear-gradient(90deg, #FB923C 0%, #EC4899 50%, #8B5CF6 100%);
+  box-shadow:0 10px 18px rgba(139,92,246,.20), 0 2px 0 rgba(255,255,255,.6) inset;
+  transition: transform .06s, box-shadow .15s, opacity .15s;
+}
+.form-pane .btn-primary.wide:hover{
+  opacity:.96; box-shadow:0 14px 26px rgba(139,92,246,.28), 0 2px 0 rgba(255,255,255,.7) inset;
+}
+.form-pane .btn-primary.wide:active{ transform: translateY(1px); }
+
+/* เส้นคั่น + เครดิตล่าง */
+.form-pane .meta{ margin-top:18px; }
+.form-pane .sep{ height:1px; background:#e5e7eb; margin:16px 0; }
+.form-pane .foot{ text-align:center; color:#6b7280; font-size:.92rem; }
+.form-pane .foot .dot{ margin:0 .6rem; opacity:.45; }
+.form-pane .foot em{ font-style:italic; }
+
+.login-container {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 40%, #fbc2eb 100%);
+}
+
+/* ฝั่งซ้าย */
+/* ===== HERO (LEFT) – soft gradient full pane, no inner white card ===== */
+.hero-pane.is-soft{
+  /* ซ้อน white-overlay จาง ๆ ทับ gradient ให้พาสเทล */
+  background-image:
+    linear-gradient(0deg, rgba(255,255,255,.62), rgba(255,255,255,.62)),
+    linear-gradient(135deg, #ff8fa3 0%, #f472b6 45%, #8b5cf6 100%);
+  background-size: cover;
+  background-position: center;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+.hero-pane.is-soft .hero-inner{
+  /* สองคอลัมน์: ข้อความ | มาสคอต */
+  display: grid;
+  grid-template-columns: 1.15fr .85fr;
+  align-items: center;
+  gap: clamp(16px,2.2vw,28px);
+  padding: clamp(28px,3.4vw,40px) clamp(30px,4vw,48px);
+  background: transparent !important;  /* กันสไตล์เก่า ๆ ที่เป็นกล่องขาว */
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* ข้อความ */
+.hero-title{
+  margin: 0 0 8px;
+  font-size: clamp(36px,4.8vw,56px);
+  line-height: 1.08;
+  font-weight: 900;
+  color: #6D28D9;
+  letter-spacing: .3px;
+}
+.hero-title .accent{ color:#7C3AED; }
+
+.hero-sub{
+  margin: 0 0 6px;
+  font-weight: 600;
+  color:#5B21B6;
+  opacity:.95;
+}
+
+/* Tagline เป็น "บรรทัดเดียว" */
+.hero-tag{
+  margin:0;
+  font-weight: 800;
+  letter-spacing:.9px;
+  color:#6D28D9;
+  white-space: nowrap;          /* สำคัญ: บรรทัดเดียว */
+  text-transform: uppercase;
+  text-shadow: 0 1px 0 rgba(255,255,255,.55);
+}
+
+/* รูปชิดขวา ไม่ทับข้อความ */
+.hero-art{ justify-self:end; }
+.hero-art img{
+  width: clamp(240px, 30vw, 360px);
+  max-height: min(54vh, 520px);
+  height:auto;
+  object-fit: contain;
+}
+
+/* จอเล็ก: สลับเป็นคอลัมน์เดียว และยอมให้ tagline ตัดบรรทัด */
+@media (max-width: 1024px){
+  .hero-pane.is-soft .hero-inner{ grid-template-columns: 1fr; }
+  .hero-art{ justify-self:center; }
+  .hero-tag{ white-space: normal; }
+}
+
+.left-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 60px 50px;
+  background: linear-gradient(135deg, #f87171 0%, #ec4899 50%, #8b5cf6 100%);
+  color: #fff;
+  border-radius: 20px 0 0 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* กล่องข้อความ */
+.left-panel .text-content {
+  max-width: 70%;
+  margin-bottom: 30px;
+}
+
+.left-panel h2 {
+  font-size: 2.5rem;
+  font-weight: 900;
+  margin: 0;
+  line-height: 1.2;
+  color: #fff;
+  text-shadow: 0 3px 10px rgba(0,0,0,0.25);
+}
+
+.left-panel .sub-text {
+  font-size: 1.1rem;
+  margin: 10px 0;
+  font-weight: 400;
+  color: rgba(255,255,255,0.9);
+}
+
+.left-panel .tagline {
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #fef9c3;
+}
+
+/* รูป mockup */
+.left-panel .mockup {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end; /* รูปชิดขวา */
+}
+
+.left-panel .mockup img {
+  width: 280px;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+
+.right-panel {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    background: transparent; /* ✅ เอาขอบขาวออก */
+    box-shadow: none;        /* ✅ เอาเงาออก */
+}
+
+
+.left-panel p {
+    font-size: 16px;
+    color: #444;
+    margin-bottom: 20px;
+}
+
+.left-panel .subtitle {
+    font-size: 14px;
+    font-style: italic;
+    color: #6a11cb;
+    font-weight: bold;
+}
+
+.left-panel img {
+    max-width: 260px;
+    margin-top: 20px;
+}
+
+/* ===== FIX: ฟอร์มฝั่งขวาให้โปร่งใส – ตัดขอบ/พื้นขาว/เงา ออก ===== */
+.login-card .form-pane,
+.form-pane.form--card,
+.form-pane.clean,
+.right-panel {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* คงสไตล์อินพุต/ปุ่มให้เหมือนก่อนหน้า (ถ้าถูกรีเซ็ต) */
+.form-pane .field{ display:grid; gap:6px; margin-bottom:14px; }
+.form-pane .field > span{ font-weight:700; color:#374151; }
+.form-pane .input{
+  width:100%; border:1px solid #e5e7eb; border-radius:999px;
+  padding:12px 16px; background:#fff; outline:none;
+  transition:border .15s, box-shadow .15s;
+}
+.form-pane .input:focus{ border-color:#A78BFA; box-shadow:0 0 0 3px rgba(167,139,250,.25); }
+
+/* ปุ่มตาให้กึ่งกลางและไม่ทับข้อความ */
+.form-pane .pass-wrap{ position:relative; }
+.form-pane .pass-wrap .input{ padding-right:56px; }
+.form-pane .pass-wrap .eye{
+  position:absolute; right:10px; top:50%; transform:translateY(-50%);
+  width:34px; height:34px; border:0; border-radius:12px; cursor:pointer;
+  display:grid; place-items:center;
+  background: radial-gradient(60% 60% at 50% 40%, rgba(0,0,0,.04), transparent), rgba(255,255,255,.9);
+  box-shadow:0 4px 14px rgba(0,0,0,.12), 0 0 0 1px rgba(0,0,0,.05) inset;
+}
+
+/* แถว remember / ลืมรหัส ให้เรียงบรรทัดเดียว */
+.form-pane .form-row{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:12px; margin:8px 0 18px; font-size:.95rem;
+}
+.form-pane input[type="checkbox"]{ appearance:auto; -webkit-appearance:auto; width:16px; height:16px; }
+
+/* ปุ่มไล่สี (โทนเดียวกับพื้นหลัง) */
+.form-pane .btn-primary{
+  width:100%; border:0; border-radius:999px; padding:12px 16px; color:#fff; font-weight:900;
+  background:linear-gradient(90deg,#FB923C 0%, #EC4899 50%, #8B5CF6 100%);
+  box-shadow:0 10px 18px rgba(139,92,246,.20), 0 2px 0 rgba(255,255,255,.6) inset;
+  transition: transform .06s, box-shadow .15s, opacity .15s;
+}
+.form-pane .btn-primary:hover{ opacity:.96; box-shadow:0 14px 26px rgba(139,92,246,.28), 0 2px 0 rgba(255,255,255,.7) inset; }
+.form-pane .btn-primary:active{ transform:translateY(1px); }
+
+
+/* ===== Left pane (Hero) – soft gradient, no white card ===== */
+.login-card .hero-pane{
+  /* เบลนด์ให้กราเดียนท์ดูจางลง */
+  background-image:
+    linear-gradient(0deg, rgba(255,255,255,.62), rgba(255,255,255,.62)),
+    linear-gradient(135deg, #ff8fa3 0%, #f472b6 45%, #8b5cf6 100%);
+  background-size: cover;
+  background-position: center;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* เอา “กรอบ/การ์ด” ด้านในทิ้ง + จัดเลย์เอาต์เป็น 2 คอลัมน์: ข้อความ | มาสคอต */
+.login-card .hero-pane .hero-inner{
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: clamp(28px,3.4vw,40px) clamp(30px,4vw,48px);
+  display: grid;
+  grid-template-columns: 1.15fr .85fr;  /* ข้อความกว้างกว่ารูปเล็กน้อย */
+  align-items: center;
+  gap: clamp(16px,2.2vw,28px);
+}
+
+/* ข้อความฝั่งซ้าย */
+.login-card .hero-pane .hero-copy{ max-width: 560px; }
+.login-card .hero-pane .hero-title{
+  margin: 0 0 8px;
+  font-size: clamp(36px,4.6vw,56px);
+  line-height: 1.08;
+  font-weight: 900;
+  color: #6D28D9;
+  letter-spacing: .3px;
+}
+.login-card .hero-pane .hero-sub{
+  margin: 0 0 6px;
+  font-weight: 600;
+  color: #5B21B6;
+  opacity: .95;
+}
+
+/* ให้ tagline อยู่ “บรรทัดเดียว” และเด่น */
+.login-card .hero-pane .hero-tag{
+  margin: 0;
+  font-weight: 800;
+  letter-spacing: .9px;
+  color: #6D28D9;
+  white-space: nowrap;            /* <- บรรทัดเดียว */
+  text-transform: uppercase;
+  text-shadow: 0 1px 0 rgba(255,255,255,.6);
+}
+
+/* รูปมาสคอตชิดขวา ไม่ทับข้อความ */
+.login-card .hero-pane .hero-mascot{ justify-self: end; }
+.login-card .hero-pane .hero-mascot img{
+  width: clamp(240px, 30vw, 360px);
+  max-height: min(54vh, 520px);
+  height: auto;
+  object-fit: contain;
+}
+
+/* Responsive: จอแคบให้สลับเป็นคอลัมน์เดียว และยอมตัดบรรทัด tagline ได้ */
+@media (max-width: 1024px){
+  .login-card .hero-pane .hero-inner{ grid-template-columns: 1fr; }
+  .login-card .hero-pane .hero-mascot{ justify-self: center; }
+  .login-card .hero-pane .hero-tag{ white-space: normal; }
+}
