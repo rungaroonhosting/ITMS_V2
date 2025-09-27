@@ -26,19 +26,16 @@
 
   <!-- กล่องหลัก -->
   <main class="login-shell">
-  <section class="login-card">
-    
+  <section class="login-card">    
     {{-- ฝั่งซ้าย --}}
    {{-- ====== ฝั่งซ้าย (Hero) – เหมือนรูปแรก ====== --}}
 <!-- LEFT / HERO  -->
 <aside class="hero-pane is-soft">
   <div class="hero-inner two-col">
     <div class="hero-copy">
-      <h1 class="hero-title">
-        บริการ <span class="accent">ออนไลน์</span>
-      </h1>
-      <p class="hero-sub">ให้คุณจัดการเรื่องต่าง ๆ ด้วยตัวคุณเอง ตลอด 24 ชั่วโมง</p>
+      <h1 class="hero-title">บริการออนไลน์</h1>
       <p class="hero-tag">PROFESSIONAL IT MANAGEMENT SOLUTIONS</p>
+      <p class="hero-sub">ให้คุณจัดการเรื่องต่าง ๆ ด้วยตัวคุณเอง ตลอด 24 ชั่วโมง</p>
     </div>
 
     <figure class="hero-art">
@@ -70,11 +67,10 @@
 
     {{-- password --}}
     <label class="field pass-wrap">
-      <span>รหัสผ่าน</span>
-      <input id="password" class="input" type="password" name="password" placeholder="กรอกรหัสผ่าน" required autocomplete="current-password">
-      <button type="button" class="eye soft" data-toggle-pass aria-label="แสดง/ซ่อนรหัสผ่าน">👁</button>
-    </label>
-
+  <span>รหัสผ่าน</span>
+  <input id="password" type="password" name="password" class="input" placeholder="กรอกรหัสผ่าน" required>
+  <button type="button" class="eye" id="togglePass" aria-label="สลับการแสดงรหัสผ่าน">👁️</button>
+</label>
     <div class="form-row">
       <label class="remember">
         <input type="checkbox" name="remember"> จดจำการเข้าสู่ระบบ
@@ -106,6 +102,17 @@ document.addEventListener('click', e => {
   const ip = document.getElementById('password');
   if(ip) ip.type = ip.type === 'password' ? 'text' : 'password';
 });
+</script>
+<script>
+  (function(){
+    const pass = document.getElementById('password');
+    const btn  = document.getElementById('togglePass');
+    if(pass && btn){
+      btn.addEventListener('click', () => {
+        pass.type = (pass.type === 'password') ? 'text' : 'password';
+      });
+    }
+  })();
 </script>
 
 </main>
