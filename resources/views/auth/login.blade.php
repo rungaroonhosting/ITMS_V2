@@ -32,18 +32,17 @@
    {{-- ====== ฝั่งซ้าย (Hero) – เหมือนรูปแรก ====== --}}
 <aside class="hero-pane hero--layout is-plain">
   <div class="hero-inner">
-    <div class="hero-row">
-      <div class="left-panel">
-        <h1 class="hero-title u-purple">บริการออนไลน์</h1>
-        <p class="hero-sub u-purple-600">ให้คุณจัดการเรื่องต่าง ๆ ด้วยตัวคุณเอง ตลอด 24 ชั่วโมง</p>
-        <p class="hero-tag u-purple-700">PROFESSIONAL IT MANAGEMENT SOLUTIONS</p>
-      </div>
-
-      <figure class="hero-mascot hero-mascot--small">
-        <img src="{{ asset('images/mockup.png') }}" alt="Mascot">
-      </figure>
+    <div class="left-panel">
+    <div class="text-content">
+        <h2>บริการออนไลน์</h2>
+        <p class="sub-text">ให้คุณจัดการเรื่องต่าง ๆ ด้วยตัวคุณเอง ตลอด 24 ชั่วโมง</p>
+        <span class="tagline">PROFESSIONAL IT MANAGEMENT SOLUTIONS</span>
     </div>
-  </div>
+    <div class="mockup">
+        <img src="{{ asset('images/mockup.png') }}" alt="Mockup" />
+    </div>
+</div>
+
 </aside>
 
 {{-- ====== ฝั่งขวา (Form) – ตามภาพตัวอย่าง ====== --}}
