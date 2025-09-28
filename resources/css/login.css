@@ -320,7 +320,12 @@ input[type="checkbox"]{
 /* ===== Layout blocks only (no page background) ===== */
 
 /* คุมฟอนต์ทั่วหน้า แต่ไม่ยุ่ง background ของหน้า */
-.auth{ min-height:100vh; font-family:var(--font); color:var(--text); }
+.auth {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;   /* จัดแนวกลางแนวตั้ง */
+  justify-content: center; /* จัดแนวกลางแนวนอน */
+}
 
 /* กริด 2 คอลัมน์ให้สัดส่วนเหมือนแบบ */
 .auth__grid{
@@ -345,47 +350,55 @@ input[type="checkbox"]{
 
 /* Title/Subtitle/Lead (โทนตัวหนังสือตามแบบ) */
 .lp-title{
-  font-weight:900;
-  font-size:clamp(40px,5.2vw,64px);
-  line-height:1.05;
-  margin:0 0 12px 0;
-  background:linear-gradient(90deg,#6d28d9 0%, #8b5cf6 40%, #ec4899 100%);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  text-shadow:0 3px 12px rgba(0,0,0,.18);
+  font-weight: 900;
+  font-size: clamp(40px, 5.2vw, 64px);
+  line-height: 1.05;
+  margin: 30px 0 10px 0;
+
+  /* ขาวล้วน + เงาซอฟต์สองชั้น */
+  color: #fff;
+  -webkit-text-fill-color: #fff;
+  text-shadow:
+    0 2px 6px rgba(0,0,0,.22),
+    0 12px 28px rgba(0,0,0,.25);
 }
 .lp-sub{
-  margin-bottom:14px;
-  font-size:clamp(12px,1.1vw,14px);
-  letter-spacing:.18em;
-  text-transform:uppercase;
-  color:rgba(255,255,255,.92);
+  margin-bottom: 5px;
+  font-size: clamp(16px,1.1vw,14px);
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.96);
+  text-shadow: 0 2px 6px rgba(0,0,0,.15);
 }
 .lp-lead{
-  font-size:clamp(14px,1.3vw,18px);
-  line-height:1.65;
-  color:rgba(255,255,255,.95);
+  font-size: clamp(14px,1.3vw,18px);
+  line-height: 1.65;
+  color: rgba(255,255,255,.98);
+  text-shadow: 0 2px 6px rgba(0,0,0,.18);
 }
-
 /* Mascot: ล่าง–ซ้ายชิดแนวกลาง (การ์ดขวาทับ) */
-.lp-hero{
-  position:absolute;
-  bottom:clamp(18px,5vh,32px);
-  right:-40px;                     /* ดันเข้าใกล้การ์ดขวา */
-  max-width:min(36vw,440px);
-  width:100%; height:auto;
-  z-index:2; pointer-events:none;
-  filter:drop-shadow(0 18px 30px rgba(0,0,0,.20));
+.lp-hero {
+  position: absolute;
+  bottom: -20px;    /* ขยับขึ้น/ลง */
+  right: -80px;    /* ขยับซ้าย/ขวา */
+  max-width: 380px; /* ปรับขนาด */
+  width: 100%;
+  height: auto;
+  z-index: 5;            /* สูงกว่าการ์ด */
+  filter: drop-shadow(0 18px 30px rgba(0,0,0,.20));
+  pointer-events: none;
 }
 
 /* ===== RIGHT : การ์ดฟอร์ม ===== */
-.auth-card{
-  background:#fff;
-  border-radius:var(--card-radius);
-  box-shadow:var(--shadow);
-  padding:clamp(18px,2.6vw,26px);
-  display:flex; flex-direction:column; gap:16px;
-  position:relative; z-index:3;        /* ให้ทับ mascot */
+.auth-card {
+  background: #fff;
+  border-radius: 28px;   /* มุมมนชัดเจน */
+  box-shadow: 0 10px 35px rgba(0,0,0,.10);
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  z-index: 3;
 }
 .auth-card__brand{ display:flex; align-items:flex-end; gap:10px; margin-bottom:8px; }
 .brand-img{ height:44px; display:block; }
@@ -421,5 +434,10 @@ input[type="checkbox"]{
 @media (max-width:980px){
   .auth__grid{ grid-template-columns:1fr; }
   .left-pane{ padding-bottom:140px; }
-  .lp-hero{ position:relative; right:auto; bottom:0; max-width:320px; margin-top:18px; }
+}
+@media (max-width: 1200px){
+  .lp-hero{ right: -48px; max-width: 460px; }
+}
+@media (max-width: 1024px){
+  .lp-hero{ right: -36px; max-width: 420px; }
 }
