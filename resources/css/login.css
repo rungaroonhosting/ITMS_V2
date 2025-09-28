@@ -112,8 +112,13 @@ html,body {height:100%;margin:0}
   color: #6D28D9;
   letter-spacing: .2px;
 }
+.hero-title{ margin-bottom: .15rem; }
 .hero-title .accent{ color:#7C3AED; }
 .hero-sub{
+  font-size: clamp(14px, 1.05vw, 16px);
+  line-height: 1.75;
+  margin-top: .5rem;
+  max-width: 34ch;
   margin: 0 0 8px;
   font-weight: 600;
   color:#4B2FB6;
@@ -121,9 +126,12 @@ html,body {height:100%;margin:0}
 }
 .hero-tag{
   margin:0;
-  font-weight: 600;
-  letter-spacing:.9px;
+  font-weight: 700;
+  font-size: clamp(12px, 0.9vw, 14px);
+  letter-spacing:.08px;
   color:#6D28D9;
+  opacity:.95;
+  margin-top: .25rem;
   text-transform: uppercase;
   white-space: nowrap;             /* บรรทัดเดียว */
   text-shadow: 0 1px 0 rgba(255,255,255,.55);
@@ -147,15 +155,19 @@ html,body {height:100%;margin:0}
 }
 
 .brand{
-  display: none; /* ปิดโลโก้/พื้นที่ที่ไม่ใช้ หากมีใน Blade */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: .75rem;
+  gap: .5rem;
 }
 
+.form-pane .brand img{ max-height: 56px; width: auto; }
 .form-title{
-  margin: 0 0 16px;
-  font-size: 24px;
-  font-weight: 800;
-  color: #B91C1C;
   text-align: center;
+  font-weight: 700;
+  letter-spacing: .02em;
+  margin-bottom: 1.25rem;
 }
 
 /* กลุ่มฟิลด์ */
@@ -168,6 +180,32 @@ html,body {height:100%;margin:0}
   font-weight: 700;
   color: #374151;
 }
+
+.field.pass-wrap,
+.pass-wrap{ position: relative; }
+.pass-wrap .eye,
+.field.pass-wrap .eye,
+.input-group .eye{
+  position: absolute;
+  right: .75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px; height: 44px;          /* กรอบปุ่ม */
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 8px 28px rgba(33, 39, 54, 0.08);
+  cursor: pointer;
+  z-index: 2;
+}
+.pass-wrap input[type="password"],
+.pass-wrap input[type="text"]{
+  padding-right: 3.25rem !important;  /* เผื่อที่ให้ปุ่มตา */
+}
+
+button[data-toggle-pass]{ all: unset; cursor: pointer; }
 
 /* อินพุต */
 .input{
@@ -247,17 +285,27 @@ input[type="checkbox"]{
 }
 
 /* ---------- Responsive ---------- */
+/* จอ 1280 ลงมา: ลดการดัน แต่ยังใหญ่พอ */
+@media (max-width: 1280px){
+  .hero-mock{
+    width: clamp(320px, 40vw, 520px);
+    transform: translateX(6px);
+  }
+}
+
+/* จอ ≤ 1024 (แท็บเล็ตลงไป): เอา transform ออก จัดกลาง */
 @media (max-width: 1024px){
-  .login-card{ grid-template-columns: 1fr; }
-  .hero-inner{ grid-template-columns: 1fr; text-align: center; }
-  .hero-art{ justify-self: center; }
-  .hero-tag{ white-space: normal; }      /* จอแคบ ยอมตัดบรรทัด */
-  .form-pane{ border-top: 1px solid rgba(0,0,0,.06); }
+  .hero-mock{
+    width: min(64vw, 520px);
+    transform: none;
+    margin-inline: auto;
+  }
 }
 
 /* Hero title ให้เป็นบรรทัดเดียว */
 .hero-title {
   white-space: nowrap;
+  margin-bottom: .15rem;
 }
 
 /* Hero art mockup ให้ใหญ่ขึ้นและชิดขวา */
