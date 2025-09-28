@@ -39,42 +39,65 @@
     </section>
 
     {{-- RIGHT --}}
-    <section class="auth-card">
-      <div class="auth-card__brand">
-        <img src="{{ asset('images/logo.png') }}" alt="RWebDesign" class="brand-img">
-      </div>
+<div class="login-box">
+    <!-- Logo -->
+<div class="auth-card__brand brand--center">
+  <img src="{{ asset('images/logo.png') }}" alt="RWebDesign" class="brand-img">
+</div>
+<h2 class="auth-card__title title--center">เข้าสู่ระบบ</h2>
 
-      <h2 class="auth-card__title">เข้าสู่ระบบ</h2>
-      <form method="POST" action="{{ route('login') }}" class="auth-form">
+
+    <!-- Form -->
+    <form method="POST" action="{{ route('login') }}">
         @csrf
-        <label class="f-field">
-          <span class="f-label">อีเมล</span>
-          <input id="email" type="email" name="email" required class="f-control">
-        </label>
 
-        <label class="f-field">
-          <span class="f-label">รหัสผ่าน</span>
-          <input id="password" type="password" name="password" required class="f-control">
-        </label>
-
-        <div class="f-row">
-          <label class="f-remember">
-            <input type="checkbox" name="remember"> จดจำการเข้าสู่ระบบ
-          </label>
-          <a class="f-link" href="{{ route('password.request') }}">ลืมรหัสผ่าน?</a>
+        <div class="form-group">
+            <label for="email">อีเมล</label>
+            <input id="email" type="email" name="email" required autofocus>
         </div>
 
-        <button type="submit" class="btn-primary">เข้าสู่ระบบ</button>
-      </form>
+        <div class="form-group password-wrapper">
+<label class="f-field">
+  <span class="f-label">รหัสผ่าน</span>
+  <div class="f-password">
+    <input id="password" type="password" name="password" required autocomplete="current-password" class="f-control" placeholder="">
+    <button type="button" class="pw-toggle" aria-label="แสดง/ซ่อนรหัสผ่าน" onclick="togglePassword()">
+      <!-- ไอคอนตาแบบ SVG (คมกริบ) -->
+      <svg class="icon-eye" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+        <path d="M12 5C6.5 5 2.2 8.6 1 12c1.2 3.4 5.5 7 11 7s9.8-3.6 11-7c-1.2-3.4-5.5-7-11-7Zm0 11a4 4 0 1 1 0-8 4 4 0 0 1 0 8Z" fill="currentColor"/>
+      </svg>
+    </button>
+  </div>
+  @error('password') <span class="f-error">{{ $message }}</span> @enderror
+</label>
 
-      <footer class="auth-card__footer">
-        <p>© {{ date('Y') }} IT Management System</p>
-        <p>System by <strong>Rungaroon Solution</strong></p>
-      </footer>
-    </section>
-  </main>
+        </div>
+
+<div class="flex items-center justify-between mt-2">
+  <label class="flex items-center">
+    <input type="checkbox" name="remember" class="mr-2">
+    <span>จดจำการเข้าสู่ระบบ</span>
+  </label>
+  <a href="{{ route('password.request') }}">ลืมรหัสผ่าน?</a>
 </div>
 
+        <button type="submit" class="btn-primary">เข้าสู่ระบบ</button>
+    </form>
+
+    <!-- Footer -->
+    <div class="auth-card__footer">
+        © 2025 IT Management System · System by <strong>Rungaroon Solution</strong>
+    </div>
+</div>
+
+  </main>
+</div>
+<script>
+function togglePassword() {
+    const input = document.getElementById("password");
+    input.type = (input.type === "password") ? "text" : "password";
+}
+</script>
 
 </main>
 </body>
