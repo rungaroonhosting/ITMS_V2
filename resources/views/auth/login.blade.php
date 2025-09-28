@@ -25,96 +25,69 @@
 
 
   <!-- กล่องหลัก -->
-  <main class="login-shell">
-  <section class="login-card">    
-    {{-- ฝั่งซ้าย --}}
-   {{-- ====== ฝั่งซ้าย (Hero) – เหมือนรูปแรก ====== --}}
-<!-- LEFT / HERO  -->
-<aside class="hero-pane is-soft">
-  <div class="hero-inner two-col">
-    <div class="hero-copy">
-      <h1 class="hero-title">บริการออนไลน์</h1>
-      <p class="hero-tag">PROFESSIONAL IT MANAGEMENT SOLUTIONS</p>
-      <p class="hero-sub">ให้คุณจัดการเรื่องต่าง ๆ ด้วยตัวคุณเอง ตลอด 24 ชั่วโมง</p>
-    </div>
+{{-- resources/views/auth/login.blade.php --}}
+<div class="auth">
+  <main class="auth__grid">
+    {{-- ===== LEFT: โปร่งใส + ข้อความ + Mascot ===== --}}
+    <section class="left-pane">
+      <div class="lp-copy">
+        <h1 class="lp-title">บริการออนไลน์</h1>
+        <div class="lp-sub">PROFESSIONAL IT MANAGEMENT SOLUTIONS</div>
+        <p class="lp-lead">ให้คุณจัดการเรื่องต่าง ๆ ด้วยตัวคุณเอง ตลอด 24 ชั่วโมง</p>
+      </div>
 
-    <figure class="hero-art">
-      {{-- เปลี่ยนให้ตรงกับชื่อไฟล์รูปของคุณ --}}
-      <img src="{{ asset('images/mockup.png') }}" alt="Mascot">
-    </figure>
-  </div>
-</aside>
+      {{-- มาสคอต (ปรับ path ให้ถูกกับไฟล์จริงของคุณ) --}}
+      <img src="{{ asset('images/mockup.png') }}" alt="Mascot" class="lp-hero">
+    </section>
 
+    {{-- ===== RIGHT: การ์ดฟอร์ม ===== --}}
+    <section class="auth-card" role="region" aria-label="Login form">
+      <div class="auth-card__brand">
+        {{-- โลโก้ (ปรับ path ให้ถูกกับไฟล์จริง) --}}
+        <img src="{{ asset('images/logo.png') }}" alt="RWebDesign" class="brand-img">
+      </div>
 
-{{-- ====== ฝั่งขวา (Form) – ตามภาพตัวอย่าง ====== --}}
-<section class="form-pane form--card clean">
-<div class="login-right">
-        <img src="{{ asset('images/logo.png') }}" class="logo" alt="Logo"> <!-- เผื่อที่โลโก้ -->
-  <h2 class="form-heading">เข้าสู่ระบบ</h2>
+      <h2 class="auth-card__title">เข้าสู่ระบบ</h2>
 
-  @if ($errors->any())
-    <div class="alert error">อีเมลหรือรหัสผ่านไม่ถูกต้อง</div>
-  @endif
+      <form method="POST" action="{{ route('login') }}" class="auth-form">
+        @csrf
 
-  <form method="POST" action="{{ route('login') }}" class="login-form">
-    @csrf
+        <label class="f-field">
+          <span class="f-label">อีเมล</span>
+          <input id="email" type="email" name="email" value="{{ old('email') }}"
+                 required autocomplete="username" autofocus class="f-control">
+          @error('email') <span class="f-error">{{ $message }}</span> @enderror
+        </label>
 
-    {{-- email --}}
-    <label class="field">
-      <span>อีเมล</span>
-      <input id="email" class="input" type="email" name="email" value="{{ old('email') }}" placeholder="กรอกอีเมล" required autocomplete="username">
-    </label>
+        <label class="f-field">
+          <span class="f-label">รหัสผ่าน</span>
+          <div class="f-password">
+            <input id="password" type="password" name="password" required
+                   autocomplete="current-password" class="f-control">
+          </div>
+          @error('password') <span class="f-error">{{ $message }}</span> @enderror
+        </label>
 
-    {{-- password --}}
-    <label class="field pass-wrap">
-  <span>รหัสผ่าน</span>
-  <input id="password" type="password" name="password" class="input" placeholder="กรอกรหัสผ่าน" required>
-  <button type="button" class="eye" id="togglePass" aria-label="สลับการแสดงรหัสผ่าน">👁️</button>
-</label>
-    <div class="form-row">
-      <label class="remember">
-        <input type="checkbox" name="remember"> จดจำการเข้าสู่ระบบ
-      </label>
-      @if (Route::has('password.request'))
-        <a class="link" href="{{ route('password.request') }}">ลืมรหัสผ่าน?</a>
-      @endif
-    </div>
+        <div class="f-row">
+          <label class="f-remember">
+            <input type="checkbox" name="remember">
+            <span>จดจำการเข้าสู่ระบบ</span>
+          </label>
+          @if (Route::has('password.request'))
+            <a class="f-link" href="{{ route('password.request') }}">ลืมรหัสผ่าน?</a>
+          @endif
+        </div>
 
-    <button type="submit" class="btn-primary wide">เข้าสู่ระบบ</button>
+        <button type="submit" class="btn-primary">เข้าสู่ระบบ</button>
+      </form>
 
-    <div class="meta">
-      <div class="sep"></div>
-      <p class="foot">
-        © 2025 IT Management System
-        <span class="dot">·</span>
-        System by <strong>Rungaroon <em>Solution</em></strong>
-      </p>
-    </div>
-  </form>
- </div>
-</section>
+      <footer class="auth-card__footer">
+        © {{ date('Y') }} IT Management System · System by
+        <strong>Rungaroon <em>Solution</em></strong>
+      </footer>
+    </section>
+  </main>
+</div>
 
-{{-- toggle password --}}
-<script>
-document.addEventListener('click', e => {
-  const btn = e.target.closest('[data-toggle-pass]');
-  if(!btn) return;
-  const ip = document.getElementById('password');
-  if(ip) ip.type = ip.type === 'password' ? 'text' : 'password';
-});
-</script>
-<script>
-  (function(){
-    const pass = document.getElementById('password');
-    const btn  = document.getElementById('togglePass');
-    if(pass && btn){
-      btn.addEventListener('click', () => {
-        pass.type = (pass.type === 'password') ? 'text' : 'password';
-      });
-    }
-  })();
-</script>
-
-</main>
 </body>
 </html>
