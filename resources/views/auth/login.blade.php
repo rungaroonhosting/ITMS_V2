@@ -25,26 +25,26 @@
 
 
   <!-- กล่องหลัก -->
-{{-- resources/views/auth/login.blade.php --}}
 <div class="auth">
   <main class="auth__grid">
-    {{-- ===== LEFT: โปร่งใส + ข้อความ + Mascot ===== --}}
-    <section class="left-pane">
+    {{-- ===== LEFT : โปร่งใส (ไม่มีพื้นหลัง) + ข้อความ + Mascot ===== --}}
+    <section class="left-pane" aria-label="Hero left">
       <div class="lp-copy">
         <h1 class="lp-title">บริการออนไลน์</h1>
         <div class="lp-sub">PROFESSIONAL IT MANAGEMENT SOLUTIONS</div>
         <p class="lp-lead">ให้คุณจัดการเรื่องต่าง ๆ ด้วยตัวคุณเอง ตลอด 24 ชั่วโมง</p>
       </div>
 
-      {{-- มาสคอต (ปรับ path ให้ถูกกับไฟล์จริงของคุณ) --}}
+      {{-- แทน path ให้ตรงไฟล์จริง --}}
       <img src="{{ asset('images/mockup.png') }}" alt="Mascot" class="lp-hero">
     </section>
 
-    {{-- ===== RIGHT: การ์ดฟอร์ม ===== --}}
-    <section class="auth-card" role="region" aria-label="Login form">
+    {{-- ===== RIGHT : การ์ดฟอร์ม ===== --}}
+    <section class="auth-card" role="region" aria-label="Login">
       <div class="auth-card__brand">
-        {{-- โลโก้ (ปรับ path ให้ถูกกับไฟล์จริง) --}}
+        {{-- โลโก้เป็นรูป (แก้ path ให้ตรงไฟล์จริง) --}}
         <img src="{{ asset('images/logo.png') }}" alt="RWebDesign" class="brand-img">
+        <div class="brand-sub">www.rwd1989.com</div>
       </div>
 
       <h2 class="auth-card__title">เข้าสู่ระบบ</h2>
@@ -73,6 +73,7 @@
             <input type="checkbox" name="remember">
             <span>จดจำการเข้าสู่ระบบ</span>
           </label>
+
           @if (Route::has('password.request'))
             <a class="f-link" href="{{ route('password.request') }}">ลืมรหัสผ่าน?</a>
           @endif
@@ -89,5 +90,6 @@
   </main>
 </div>
 
+</main>
 </body>
 </html>
