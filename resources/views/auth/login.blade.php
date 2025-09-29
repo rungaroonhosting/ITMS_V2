@@ -3,6 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
+<script>
+  // ส่งข้อความจากเซิร์ฟเวอร์ (ตั้งค่าเมื่อมี error/status)
+  window.laravelStatus = @json(session('status') ?? null);
+  window.laravelErrorMessage = @json($errors->first() ?? session('error') ?? null);
+</script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <title>เข้าสู่ระบบ | ITMS</title>
   @vite(['resources/css/app.css','resources/js/app.js'])
 </head>
@@ -119,5 +125,23 @@
     <div class="loader__label">กำลังโหลด...</div>
   </div>
 </div>
+@if ($errors->any())
+<script>
+  window.laravelErrors = {!! json_encode($errors->all()) !!};
+</script>
+@endif
+
+@if (session('error'))
+<script>
+  window.laravelErrorMessage = @json(session('error'));
+</script>
+@endif
+
+@if (session('status'))
+<script>
+  window.laravelStatus = @json(session('status'));
+</script>
+@endif
+
 </body>
 </html>
