@@ -322,6 +322,50 @@ input[type="checkbox"]{
   justify-content: center; /* จัดแนวกลางแนวนอน */
 }
 
+/* ตัวอักษรในช่องกรอกให้เข้มขึ้น และ caret มองเห็นชัด */
+.auth-input,
+input[type="email"].auth-input,
+input[type="text"].auth-input,
+input[type="password"].auth-input {
+  color: #1f2937;           /* slate-800 */
+  font-weight: 600;         /* ตัวหนานิดหน่อย */
+  caret-color: #4f46e5;     /* indigo-600 */
+}
+
+/* ทำให้ placeholder ไม่จางเกินไป */
+.auth-input::placeholder {
+  color: #9aa4b2;           /* slate-400/500 */
+  opacity: 1;               /* Safari บางทีลด opacity เอง */
+}
+
+/* ถ้ามีเผลอไปตั้ง opacity ให้ container – รีเซ็ตไว้ */
+.auth-field,
+.auth-input {
+  opacity: 1;
+}
+
+/* —— Safari/Chrome Autofill —— */
+/* เวลามี autofill ให้บังคับสีตัวอักษรและพื้นหลัง */
+.auth-input:-webkit-autofill,
+.auth-input:-webkit-autofill:hover,
+.auth-input:-webkit-autofill:focus,
+input.auth-input:-webkit-autofill {
+  -webkit-text-fill-color: #1f2937 !important;    /* สีตัวอักษร */
+  caret-color: #4f46e5;
+  transition: background-color 9999s ease-out 0s; /* กันแฟลชสีเหลืองอ่อน */
+  box-shadow: 0 0 0px 1000px rgba(255,255,255,0) inset; /* ลบพื้นหลังเหลืองอ่อน */
+}
+
+/* กันกรณีมี text-shadow ทำให้ตัวอักษรซีด */
+.auth-input {
+  text-shadow: none;
+}
+
+/* ถ้าปุ่มตา (show/hide) อยู่ซ้อนท้าย input ให้กันไม่ให้ทับตัวอักษร */
+.auth-input {
+  padding-right: 3.25rem; /* เผื่อพื้นที่ไอคอนด้านขวา */
+}
+
 /* กริด 2 คอลัมน์ให้สัดส่วนเหมือนแบบ */
 .auth__grid{
   width:min(1200px,96vw);
@@ -620,6 +664,31 @@ a[href*="password.request"]:hover {
   text-decoration: underline;
   outline: none;
 }
+/* ===== Page Loader ===== */
+.loader{
+  position: fixed; inset: 0; z-index: 9999;
+  display: grid; place-items: center;
+  background: radial-gradient(1200px 1200px at 50% 40%, rgba(255,255,255,.95), rgba(255,255,255,.85) 40%, rgba(255,255,255,.75) 70%, rgba(255,255,255,.6) 100%);
+  backdrop-filter: blur(4px);
+  transition: opacity .25s ease;
+}
+.loader.hidden{ opacity:0; pointer-events:none; }
+
+.loader__box{
+  display:grid; place-items:center; gap:14px;
+}
+.loader__ring{
+  width:64px; height:64px; border-radius:999px;
+  background:
+    conic-gradient(from 0turn, #f97316, #ec4899, #8b5cf6, #60a5fa, #f97316);
+  -webkit-mask: radial-gradient(farthest-side, transparent 58%, #000 60%);
+          mask: radial-gradient(farthest-side, transparent 58%, #000 60%);
+  animation: spin 1.1s linear infinite;
+  box-shadow: 0 8px 24px rgba(0,0,0,.08);
+}
+.loader__label{ font-weight:600; color:#4b5563; }
+
+@keyframes spin{ to { transform: rotate(360deg) } }
 
 
 

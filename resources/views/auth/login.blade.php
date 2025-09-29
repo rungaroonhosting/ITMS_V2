@@ -48,12 +48,12 @@
 
 
     <!-- Form -->
-    <form method="POST" action="{{ route('login') }}">
+    <form id="loginForm" method="POST" action="{{ route('login') }}">
         @csrf
 
         <div class="form-group">
             <label for="email">อีเมล</label>
-            <input id="email" type="email" name="email" required autofocus>
+            <input id="email" type="email" name="email" required autofocus class="auth-input">
         </div>
 
         <div class="form-group password-wrapper">
@@ -112,5 +112,12 @@
 </script>
 
 </main>
+{{-- Page Loader --}}
+<div id="pageLoader" class="loader hidden" aria-hidden="true">
+  <div class="loader__box">
+    <div class="loader__ring"></div>
+    <div class="loader__label">กำลังโหลด...</div>
+  </div>
+</div>
 </body>
 </html>
