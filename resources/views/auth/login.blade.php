@@ -61,42 +61,54 @@
   <span class="f-label">รหัสผ่าน</span>
   <div class="f-password">
     <input id="password" type="password" name="password" required autocomplete="current-password" class="f-control" placeholder="">
-    <button type="button" class="pw-toggle" aria-label="แสดง/ซ่อนรหัสผ่าน" onclick="togglePassword()">
-      <!-- ไอคอนตาแบบ SVG (คมกริบ) -->
-      <svg class="icon-eye" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
-        <path d="M12 5C6.5 5 2.2 8.6 1 12c1.2 3.4 5.5 7 11 7s9.8-3.6 11-7c-1.2-3.4-5.5-7-11-7Zm0 11a4 4 0 1 1 0-8 4 4 0 0 1 0 8Z" fill="currentColor"/>
-      </svg>
-    </button>
+<button type="button" class="pw-toggle pw-1img" aria-pressed="false" aria-label="แสดงรหัสผ่าน" onclick="togglePassword1Img()">
+  <img src="{{ asset('images/eye-open.png') }}" alt="" class="pw-icon">
+</button>
   </div>
   @error('password') <span class="f-error">{{ $message }}</span> @enderror
 </label>
 
         </div>
 
-<div class="flex items-center justify-between mt-2">
-  <label class="flex items-center">
+<div class="f-row">
+  <label class="f-remember">
     <input type="checkbox" name="remember" class="mr-2">
-    <span>จดจำการเข้าสู่ระบบ</span>
+    <span class="remember-text">จดจำการเข้าสู่ระบบ</span>
   </label>
-  <a href="{{ route('password.request') }}">ลืมรหัสผ่าน?</a>
+<a href="{{ route('password.request') }}" class="forgot-password">ลืมรหัสผ่าน?</a>
 </div>
+
 
         <button type="submit" class="btn-primary">เข้าสู่ระบบ</button>
     </form>
 
     <!-- Footer -->
-    <div class="auth-card__footer">
-        © 2025 IT Management System · System by <strong>Rungaroon Solution</strong>
-    </div>
+<footer class="auth-card__footer">
+  © {{ date('Y') }} IT Management System · System by
+  <a href="https://www.rungaroonhosting.com"
+     class="footer-brand"
+     target="_blank" rel="noopener"
+     aria-label="ไปที่เว็บไซต์ Rungaroon Solution">
+     Rungaroon <span>Solution</span>
+  </a>
+</footer>
+
 </div>
 
   </main>
 </div>
 <script>
-function togglePassword() {
-    const input = document.getElementById("password");
-    input.type = (input.type === "password") ? "text" : "password";
-}
+  function togglePassword1Img(){
+    const input = document.getElementById('password');
+    const btn   = document.querySelector('.pw-toggle.pw-1img');
+    const closed = input.type === 'password';   // กำลังจะ "เปิด" ให้เห็น
+
+    input.type = closed ? 'text' : 'password';
+    btn.classList.toggle('is-closed', !closed); // ถ้าเป็น text = เปิด → เอาเส้นออก
+
+    btn.setAttribute('aria-pressed', closed ? 'true' : 'false');
+    btn.setAttribute('aria-label', closed ? 'ซ่อนรหัสผ่าน' : 'แสดงรหัสผ่าน');
+  }
 </script>
 
 </main>
