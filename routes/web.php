@@ -18,7 +18,19 @@ Route::get('/', fn () => redirect()->route('dashboard'));
 */
 Route::middleware(['auth', 'role:SUPER ADMIN'])->group(function () {
     // Dashboard (ต้องมี view: resources/views/pages/dashboard.blade.php)
-    Route::view('/dashboard', 'pages.dashboard')->name('dashboard');
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+        // Endpoints สำหรับดึงข้อมูลของ Dashboard (JSON)
+        Route::prefix('api/dashboard')->group(function () {
+        Route::get('/metrics', [DashboardController::class, 'metrics'])
+        ->name('api.dashboard.metrics');
+        Route::get('/trends', [DashboardController::class, 'trends'])
+        ->name('api.dashboard.trends');
+        Route::get('/top-assets', [DashboardController::class, 'topAssets'])
+        ->name('api.dashboard.topAssets');
+        Route::get('/recent-activities', [DashboardController::class, 'recentActivities'])
+        ->name('api.dashboard.recentActivities');
+        });
 
     /*
     |--------------------------------------------------------------------------

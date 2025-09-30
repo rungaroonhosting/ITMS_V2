@@ -1,0 +1,54 @@
+:root{
+/* ดึงจากตัวแปรเดิมของหน้า Login ถ้ามี, พร้อม fallback */
+--bg: var(--login-bg, #0b1020);
+--panel: var(--login-panel, #121a33);
+--card: var(--login-card, #0f1630);
+--muted: var(--login-muted, #8ea2c6);
+--text: var(--login-text, #eaf0ff);
+--brand: var(--login-primary, #5aa7ff);
+--accent: var(--login-accent, #ff9b40);
+--warn: var(--login-warn, #ff6b6b);
+--shadow: 0 10px 24px rgba(0,0,0,.28);
+}
+
+.dash-wrap{padding: 20px; color: var(--text);}
+.dash-header{display:flex; justify-content:space-between; align-items:flex-end; margin-bottom: 16px;}
+.dash-header h1{margin:0; font-size: 28px;}
+.muted{color: var(--muted); margin-top: 4px;}
+
+.btn{border:0; padding:10px 14px; border-radius: 12px; cursor:pointer;}
+.btn-primary{background: linear-gradient(135deg, var(--brand), color-mix(in oklab, var(--brand), black 25%)); color:#fff; box-shadow: var(--shadow);}
+
+.grid{display:grid; gap:16px; margin-bottom:16px;}
+.grid-4{grid-template-columns: repeat(4, 1fr);}
+.grid-2{grid-template-columns: repeat(2, 1fr);}
+
+@media (max-width: 1200px){
+.grid-4{grid-template-columns: repeat(2, 1fr);}
+}
+@media (max-width: 700px){
+.grid-2{grid-template-columns: 1fr;}
+}
+
+.kpi-card{background: var(--card); border:1px solid rgba(255,255,255,.06); border-radius: 18px; padding:18px; box-shadow: var(--shadow);}
+.kpi-card .kpi-title{font-size:12px; color: var(--muted);}
+.kpi-card .kpi-value{font-size: 32px; font-weight: 700; margin-top: 8px;}
+.kpi-card.warning{outline: 2px dashed color-mix(in oklab, var(--warn), transparent 65%);}
+
+.panel{background: var(--panel); border:1px solid rgba(255,255,255,.08); border-radius: 18px; box-shadow: var(--shadow);}
+.panel-head{padding:14px 16px; border-bottom:1px solid rgba(255,255,255,.06);}
+.panel-head h3{margin:0; font-size: 16px;}
+.panel-body{padding:16px;}
+
+.table{width:100%; border-collapse: collapse;}
+.table th, .table td{padding:10px 8px; border-bottom: 1px dashed rgba(255,255,255,.08);}
+.table .right{text-align:right;}
+
+.timeline{list-style:none; margin:0; padding:0;}
+.timeline li{position:relative; padding-left:18px; margin:10px 0; color:#dbe6ff;}
+.timeline li:before{content:''; width:8px; height:8px; border-radius:50%; background: var(--accent); position:absolute; left:0; top:7px;}
+
+/* พื้นหลังรวมหน้า */
+body{background: radial-gradient(1200px 800px at 10% -10%, color-mix(in oklab, var(--brand), transparent 84%), transparent),
+radial-gradient(1200px 800px at 110% 10%, color-mix(in oklab, var(--accent), transparent 88%), transparent),
+var(--bg);}

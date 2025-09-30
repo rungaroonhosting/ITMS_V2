@@ -103,10 +103,18 @@
 
     bindTogglePassword(form);
 
-    form.addEventListener('submit', (e) => {
-      const email = form.querySelector('input[type="email"]');
-      const password = form.querySelector('input[type="password"], input[data-type="password"]');
-      const submitBtn = form.querySelector('[type="submit"]');
+form.addEventListener('submit', (e) => {
+  const email = form.querySelector('[name="email"]').value.trim();
+  const pass  = form.querySelector('[name="password"]').value.trim();
+
+  if (!email || !pass) {
+    e.preventDefault();
+    alert(!email ? 'กรุณากรอกอีเมล' : 'กรุณากรอกรหัสผ่าน');
+    return;
+  }
+  // ❌ อย่า e.preventDefault() ตรงนี้
+  // ✅ ปล่อยให้ form ส่งไปตาม action="{{ route('login') }}"
+
 
       // ตรวจค่าว่าง
       if (!email?.value.trim()) {

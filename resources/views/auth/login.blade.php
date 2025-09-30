@@ -10,7 +10,7 @@
 </script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <title>เข้าสู่ระบบ | ITMS</title>
-  @vite(['resources/css/app.css','resources/js/app.js'])
+  @vite(['resources/css/app.css','resources/js/app.js','resources/css/login.css','resources/js/login.js'])
 </head>
 <body class="login-body">
   <!-- พื้นหลัง -->
@@ -141,6 +141,11 @@
 <script>
   window.laravelStatus = @json(session('status'));
 </script>
+@endif
+@if ($errors->any())
+  <div class="alert-error">
+    {{ $errors->first() }}
+  </div>
 @endif
 
 </body>

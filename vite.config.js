@@ -8,9 +8,10 @@ export default defineConfig({
         'resources/css/app.css',
         'resources/js/app.js',
         'resources/css/login.css',
-        'resources/js/login.js', // ✅ เพิ่มตรงนี้
+        'resources/js/login.js',
       ],
       refresh: true,
     }),
   ],
-});
+})
+
